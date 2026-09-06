@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>Hello 算法：“走一步看一步”的智慧 | 灵感之见</title>
+  <meta name="description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》  “走一步看一步”，是我们面对不断变化的世界所采取的应对策略。 多数时候，我们无法对未来做出准确预测，只能根据上一件事的结果对下一件事做决策。介绍“分治”的时候，我们已经接触过这种策略。本篇主角依然如此，但又有所不同。 先看个例子。 爬楼梯给一个 n 阶楼梯，每步可以上 1">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello 算法：“走一步看一步”的智慧">
+<meta property="og:url" content="https://ideazhao.com/2026/04/27/hello_algo_seven/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》  “走一步看一步”，是我们面对不断变化的世界所采取的应对策略。 多数时候，我们无法对未来做出准确预测，只能根据上一件事的结果对下一件事做决策。介绍“分治”的时候，我们已经接触过这种策略。本篇主角依然如此，但又有所不同。 先看个例子。 爬楼梯给一个 n 阶楼梯，每步可以上 1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/5711fbbd78384c3880753685acd5689e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=CzuCTVPMRdGzFdpOhcXpoJt7CrE%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/49c4012e4db74f33a86d30531c1b5807~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=fTV7%2FmG3AdWHacG42hkrGb49I9I%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/f83eec96f5764420a070059255add6ac~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=2Vt0b2ydRbARXlPwHNOY5ZrSM30%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/63aab3d96cd8416fb65c39d4be64d8ad~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=S%2BXk94AozvEZXplxQVes%2BG26p3s%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/1ad54b1d91cb4862bae29407e08da345~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=w4VL1aYiKxNu2WWF5sl2l0LS3ak%3D">
+<meta property="og:updated_time" content="2026-09-06T13:33:18.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello 算法：“走一步看一步”的智慧">
+<meta name="twitter:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》  “走一步看一步”，是我们面对不断变化的世界所采取的应对策略。 多数时候，我们无法对未来做出准确预测，只能根据上一件事的结果对下一件事做决策。介绍“分治”的时候，我们已经接触过这种策略。本篇主角依然如此，但又有所不同。 先看个例子。 爬楼梯给一个 n 阶楼梯，每步可以上 1">
+<meta name="twitter:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/5711fbbd78384c3880753685acd5689e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1788712285&x-signature=CzuCTVPMRdGzFdpOhcXpoJt7CrE%3D">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2026/04/27/hello_algo_seven/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Hello 算法：“走一步看一步”的智慧","description":"每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》 “走一步看一步”，是我们面对不断变化的世界所采取的应对策略。 多数时候，我们无法对未来做出准确预测，只能根据上一件事的结果对下一件事做决策。介绍“分治”的时候，我们已经接触过这种策略。本篇主角依然如此，但又有所不同。 先看个例子。 爬楼梯","datePublished":"2026-04-26T16:00:00.000Z","dateModified":"2026-09-06T13:33:18.889Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2026/04/27/hello_algo_seven/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2026/04/27/hello_algo_seven/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#爬楼梯"><span class="toc-number">1.</span> <span class="toc-text">爬楼梯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暴力搜索"><span class="toc-number">2.</span> <span class="toc-text">暴力搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记忆化搜索"><span class="toc-number">3.</span> <span class="toc-text">记忆化搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划"><span class="toc-number">4.</span> <span class="toc-text">动态规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#空间优化"><span class="toc-number">5.</span> <span class="toc-text">空间优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子问题玄机"><span class="toc-number">6.</span> <span class="toc-text">子问题玄机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#识别动态规划"><span class="toc-number">7.</span> <span class="toc-text">识别动态规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">8.</span> <span class="toc-text">小结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hello_algo_seven" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hello 算法：“走一步看一步”的智慧
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/04/27/hello_algo_seven/" class="article-date">
+	  <time datetime="2026-04-26T16:00:00.000Z" itemprop="datePublished">2026-04-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/04/27/hello_algo_seven/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>每个系列一本前端好书，帮你轻松学重点。</p>
+<p>本系列来自上海交通大学硕士，华为高级算法工程师 <strong>靳宇栋</strong> 的 <strong>《Hello，算法》</strong></p>
+</blockquote>
+<p>“走一步看一步”，是我们面对不断变化的世界所采取的应对策略。</p>
+<p>多数时候，我们无法对未来做出准确预测，只能根据上一件事的结果对下一件事做决策。介绍“分治”的时候，我们已经接触过这种策略。本篇主角依然如此，但又有所不同。</p>
+<p>先看个例子。</p>
+<h2 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h2><p>给一个 n 阶楼梯，每步可以上 1 阶或者 2 阶，问有多少种方案可以爬到楼顶？</p>
+<p>假设 n 是3，那么方案共 3 种。如下图所示。</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/5711fbbd78384c3880753685acd5689e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1788712285&amp;x-signature=CzuCTVPMRdGzFdpOhcXpoJt7CrE%3D" alt="微信图片\_2026-04-27\_004502\_056.jpg"></p>
+<p>这种方案采用的是“穷举”，每轮选择上 1 阶或 2 阶，每当到达顶部时就将方案数量加 1，当越过顶部时就将其剪枝。</p>
+<p>这是一种将问题看做一系列<strong>决策步骤</strong>的方案，我们还可以尝试从<strong>问题分解</strong>的角度分析。</p>
+<h2 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h2><p>假设，爬到第 i 阶有 dp(i)种方案，那么dp(i)就是原问题，子问题包括：</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/49c4012e4db74f33a86d30531c1b5807~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1788712285&amp;x-signature=fTV7%2FmG3AdWHacG42hkrGb49I9I%3D" alt="www.hello-algo.com\_chapter\_dynamic\_programming\_intro\_to\_dynamic\_programming\_.png"></p>
+<p>由于每轮只能上 1 阶或 2 阶，因此，我们只能从第 i-1阶或第 i-2 阶迈向第 i 阶。</p>
+<p>可得出一个重要推论：爬到第 i -2 阶的方案数加上爬到第 i-1 阶的方案数就等于爬到第 i 阶的方案数。</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/f83eec96f5764420a070059255add6ac~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1788712285&amp;x-signature=2Vt0b2ydRbARXlPwHNOY5ZrSM30%3D" alt="www.hello-algo.com\_chapter\_dynamic\_programming\_intro\_to\_dynamic\_programming\_ (1).png"></p>
+<p>这意味着在爬楼梯问题中，各个子问题之间存在递推关系，<strong>原问题的解可以由子问题的解构建得来</strong>。如下图所示：</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/63aab3d96cd8416fb65c39d4be64d8ad~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1788712285&amp;x-signature=S%2BXk94AozvEZXplxQVes%2BG26p3s%3D" alt="微信图片\_2026-04-27\_004511\_440.jpg"></p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 搜索 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 已知 dp[1] 和 dp[2] ，返回之</span></span><br><span class="line">    <span class="keyword">if</span> (i === <span class="number">1</span> || i === <span class="number">2</span>) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="comment">// dp[i] = dp[i-1] + dp[i-2]</span></span><br><span class="line">    <span class="keyword">const</span> count = dfs(i - <span class="number">1</span>) + dfs(i - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 爬楼梯：搜索 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">climbingStairsDFS</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> dfs(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看到一个熟悉的身影—“<strong>递归</strong>”，暴力搜索会形成一个递归树，对于问题 dp[n]，其递归树的深度为 n，时间复杂度为O(2n)。</p>
+<p>情况不太妙，因为指数阶具备爆炸式增长的特点，如果输入一个比较大的 n ，会陷入漫长的等待。</p>
+<p>时间复杂度为何如此之高？我们观察一下递归树。</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/1ad54b1d91cb4862bae29407e08da345~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1788712285&amp;x-signature=w4VL1aYiKxNu2WWF5sl2l0LS3ak%3D" alt="微信图片\_2026-04-27\_004517\_283.jpg"></p>
+<p>聪明的你一眼就看出，这棵树出现了多个相同的“子问题”，大部分计算资源都浪费在这些重叠的子问题上。</p>
+<p>那么，优化的措施就有了。</p>
+<h2 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h2><p>为提升效率，需要做的改进是：<strong>重叠子问题只计算一次</strong>。</p>
+<p>为此，我们声明一个数组 <code>mem</code> 来记录子问题的解，并在搜索过程中将重叠子问题剪枝。</p>
+<ol>
+<li>首次计算 dp[i] 时，将其记录至 <code>mem[i]</code> ，以便之后使用。</li>
+<li>再次需要计算 dp[i] 时，直接从 <code>mem[i]</code> 中获取结果，避免重复计算。</li>
+</ol>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 记忆化搜索 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">i, mem</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 已知 dp[1] 和 dp[2] ，返回之</span></span><br><span class="line">    <span class="keyword">if</span> (i === <span class="number">1</span> || i === <span class="number">2</span>) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="comment">// 若存在记录 dp[i] ，则直接返回之</span></span><br><span class="line">    <span class="keyword">if</span> (mem[i] != <span class="number">-1</span>) <span class="keyword">return</span> mem[i];</span><br><span class="line">    <span class="comment">// dp[i] = dp[i-1] + dp[i-2]</span></span><br><span class="line">    <span class="keyword">const</span> count = dfs(i - <span class="number">1</span>, mem) + dfs(i - <span class="number">2</span>, mem);</span><br><span class="line">    <span class="comment">// 记录 dp[i]</span></span><br><span class="line">    mem[i] = count;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 爬楼梯：记忆化搜索 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">climbingStairsDFSMem</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// mem[i] 记录爬到第 i 阶的方案总数，-1 代表无记录</span></span><br><span class="line">    <span class="keyword">const</span> mem = <span class="keyword">new</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).fill(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> dfs(n, mem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简化后，所有重复子问题都只计算1次，时间复杂度为O(n)，这是一个巨大的飞跃。</p>
+<p>那么，记忆化搜索是否还存在短板，有继续优化的可能吗？</p>
+<p>细心的朋友发现了，记忆化搜索“<strong>基于递归</strong>”的，这意味着：</p>
+<p>1、每个子问题都需要一次函数调用，函数调用需要时间成本；</p>
+<p>2、当数据量很大时，可能产生调用栈溢出；</p>
+<p>怎么办？</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>记忆化搜索流程是“始于原问题，分解成小问题”，通过回溯收集子问题的解，构建原问题的解。可称为 <strong>“从顶至底”。</strong></p>
+<p>与之相反，动态规划是一种 <strong>“从底至顶”</strong> 的方法，“从最小子问题的解开始，迭代地构建更大子问题的解”，直至得到原问题的解。</p>
+<p>由于动态规划不包含“回溯”过程，就无须使用递归，只需循环迭代。</p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 爬楼梯：动态规划 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">climbingStairsDP</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="comment">// 初始化 dp 表，用于存储子问题的解</span></span><br><span class="line">    <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).fill(<span class="number">-1</span>);</span><br><span class="line">    <span class="comment">// 初始状态：预设最小子问题的解</span></span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    dp[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 状态转移：从较小子问题逐步求解较大子问题</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="空间优化"><a href="#空间优化" class="headerlink" title="空间优化"></a>空间优化</h2><p>如果继续“吹毛求疵”，会发现，我们要求解的是dp[i]，而<strong>dp[i] 只与 dp[i-1] 和 dp[i-2] 有关</strong>，上面代码返回的却是dp[n]？</p>
+<p>完全没必要，所以它还有改进空间，便是<strong>去除数组</strong>，采用两个变量滚动前进。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 爬楼梯：空间优化后的动态规划 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">climbingStairsDPComp</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span>,</span><br><span class="line">        b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> tmp = b;</span><br><span class="line">        b = a + b;</span><br><span class="line">        a = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于省去了数组占用的空间，空间复杂度从 O(n) 降至 O(1) ，再次大幅优化。</p>
+<p>我们可以触类旁通地认为，<strong>在动态规划问题中，当前状态往往仅与前面有限个状态有关</strong>，可以只保留必要的状态，通过“降维”来节省内存空间。</p>
+<p>这种空间优化技巧被称为 <strong>“滚动变量”</strong> 或 <strong>“滚动数组”</strong> 。</p>
+<h2 id="子问题玄机"><a href="#子问题玄机" class="headerlink" title="子问题玄机"></a>子问题玄机</h2><p>本篇文章，我们再次提到“子问题”，“子问题”分解是一种通用的算法思路，之前你肯定就见过，那么，它们之间的区别是什么？</p>
+<ul>
+<li>分治算法：强调子问题相互独立。</li>
+<li>动态规划：子问题是相互依赖的，在分解过程中会出现许多重叠子问题。</li>
+<li>回溯算法：原问题的解由一系列决策步骤构成，每个决策步骤之前的子序列可看作一个子问题。</li>
+</ul>
+<h2 id="识别动态规划"><a href="#识别动态规划" class="headerlink" title="识别动态规划"></a>识别动态规划</h2><p>如何判断一个问题是不是动态规划？</p>
+<p>总的来说，如果问题包含明确的决策概念，并且解是通过一系列决策产生的，那么它就满足决策树模型。</p>
+<p>在此基础上，还有一些判断的“加分项”。</p>
+<ul>
+<li>问题包含最大（小）或最多（少）等最优化描述。</li>
+<li>问题的状态能够使用一个列表、多维矩阵或树来表示，并且一个状态与其周围的状态存在递推关系。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本篇文章系统讲解了动态规划的特点和核心实现，除了上面介绍的“爬楼梯”，还有什么常见适用场景吗？</p>
+<p><strong>0-1 背包</strong>：求解“在限定背包容量下能放入物品的最大价值”，满足决策树模型，含有“最大”关键词。</p>
+<p><strong>编辑距离</strong>：求解两个字符串之间互相转换的最少修改次数，通常用于在信息检索和自然语言处理中度量两个序列的相似度。当下最火的大语言模型中，就广泛存在此类应用。</p>
+<p>动态规划还有很多应用场景，且不易掌握和解决，需要大家正确理解和多练习才行，一起加油！~</p>
+<p>更多好文章第一时间推送，可关注公众号：<strong>前端说书匠</strong></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2026/04/27/hello_algo_seven/" title="Hello 算法：“走一步看一步”的智慧" target="_blank" rel="external">https://ideazhao.com/2026/04/27/hello_algo_seven/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/05/20/ai_engineering_one/" title="《AI工程》：在天才的游戏里，为普通人做点事"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2026/04/13/hello_algo_six/" title="Hello 算法：贪心的世界"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>JavaScript高级程序设计(第5版)：前端的能力边界 | 灵感之见</title>
+  <meta name="description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于Google的知名前端技术专家马特·弗里斯比编写的 《JavaScript高级程序设计》(第5版)  了解一门语言能做什么很重要，既是学习的起点，也是应用的落点。 JavaScript曾被认为是“玩具”语言，谁都想不到，它后来把触角伸到了服务端、工具链、App、桌面端、甚至是硬件和深度学习。 本文是此系列的最终篇，我们来探究一下，除了按照">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级程序设计(第5版)：前端的能力边界">
+<meta property="og:url" content="https://ideazhao.com/2025/09/08/javascript_high_level_design_six/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于Google的知名前端技术专家马特·弗里斯比编写的 《JavaScript高级程序设计》(第5版)  了解一门语言能做什么很重要，既是学习的起点，也是应用的落点。 JavaScript曾被认为是“玩具”语言，谁都想不到，它后来把触角伸到了服务端、工具链、App、桌面端、甚至是硬件和深度学习。 本文是此系列的最终篇，我们来探究一下，除了按照">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2026-09-06T13:33:18.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript高级程序设计(第5版)：前端的能力边界">
+<meta name="twitter:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于Google的知名前端技术专家马特·弗里斯比编写的 《JavaScript高级程序设计》(第5版)  了解一门语言能做什么很重要，既是学习的起点，也是应用的落点。 JavaScript曾被认为是“玩具”语言，谁都想不到，它后来把触角伸到了服务端、工具链、App、桌面端、甚至是硬件和深度学习。 本文是此系列的最终篇，我们来探究一下，除了按照">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2025/09/08/javascript_high_level_design_six/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"JavaScript高级程序设计(第5版)：前端的能力边界","description":"每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于Google的知名前端技术专家 马特·弗里斯比 编写的 《JavaScript高级程序设计》(第5版) 了解一门语言能做什么很重要，既是 学习的起点 ，也是 应用的落点 。 JavaScript曾被认为是“玩具”语言，谁都想不到，它后来把触角伸到了服务端、工具链、App、桌面端、甚至是硬件和深度学习。","datePublished":"2025-09-07T16:00:00.000Z","dateModified":"2026-09-06T13:33:18.886Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2025/09/08/javascript_high_level_design_six/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2025/09/08/javascript_high_level_design_six/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络请求"><span class="toc-number">1.</span> <span class="toc-text">网络请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File上传"><span class="toc-number">2.</span> <span class="toc-text">File上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图形渲染"><span class="toc-number">3.</span> <span class="toc-text">图形渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端存储"><span class="toc-number">4.</span> <span class="toc-text">客户端存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#富文本编辑"><span class="toc-number">5.</span> <span class="toc-text">富文本编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-API"><span class="toc-number">6.</span> <span class="toc-text">JavaScript API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作者线程"><span class="toc-number">7.</span> <span class="toc-text">工作者线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebAssembly"><span class="toc-number">8.</span> <span class="toc-text">WebAssembly</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前方的路"><span class="toc-number">9.</span> <span class="toc-text">前方的路</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-javascript_high_level_design_six" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript高级程序设计(第5版)：前端的能力边界
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/09/08/javascript_high_level_design_six/" class="article-date">
+	  <time datetime="2025-09-07T16:00:00.000Z" itemprop="datePublished">2025-09-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/09/08/javascript_high_level_design_six/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>每个系列一本前端好书，帮你轻松学重点。</p>
+<p>本系列来自曾供职于Google的知名前端技术专家<strong>马特·弗里斯比</strong>编写的 <strong>《JavaScript高级程序设计》(第5版)</strong></p>
+</blockquote>
+<p>了解一门语言能做什么很重要，既是<strong>学习的起点</strong>，也是<strong>应用的落点</strong>。</p>
+<p>JavaScript曾被认为是“玩具”语言，谁都想不到，它后来把触角伸到了服务端、工具链、App、桌面端、甚至是硬件和深度学习。</p>
+<p>本文是此系列的最终篇，我们来探究一下，除了按照正确的语法和良好的组织去写代码，前端到底能做什么？</p>
+<h2 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h2><p>动态数据是给网页注入活力的重要因素，可以使得每天的内容，每个人看到的内容，都不同。</p>
+<p>靠手写是不行的，需要发起网络请求。</p>
+<p>在过去，请求任务由XMLHttpRequest来完成的，但在现代Web开发中，已经被Fetch替代。</p>
+<p><strong>Fetch</strong></p>
+<p>前面提过，Fetch是基于Promise的，它能以更简洁清晰的方式实现异步，并且它支持流式响应、请求取消和自动请求重发。</p>
+<p>fetch()方法只有一个必须的参数，即请求的url，其他参数按需配置，一个基本的POST请求写法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> payload = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">  foo:<span class="string">"bar"</span></span><br><span class="line">&#125;);</span><br><span class="line">fetch(<span class="string">"url"</span>, &#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  body: payload,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (res.status == <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res.text());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>这段代码较为完整地展现了POST请求的大概结构，请求返回后，可以通过返回的状态码，及各种不同数据的处理方法，来接收结果。</p>
+<p>数据的处理方法有多种，除了text()，还有json()、blob()等，可根据返回数据的类型和需求进行选用。</p>
+<p><strong>Web Socket</strong></p>
+<p>Fetch请求是由客户端发起，服务端做响应的单向通信，但有时候我们需要实现双向通信，服务端主动向客户端推送数据，主流方案就是 Web Socket。</p>
+<p>简单使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:8080"</span>);</span><br><span class="line">  socket.onopen = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"连接成功"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  socket.onmessage = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"收到消息"</span>, e.data);</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>EventSource API</strong></p>
+<p>这是一种比较新的API，但这两年应用很广，大家看到的关于AI的信息交互，返回结果像打字机一样输出，起关键作用的就是它。</p>
+<p>示例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> eventSource = <span class="keyword">new</span> EventSource(<span class="string">"http://localhost:8080/stream"</span>);</span><br><span class="line">eventSource.onmessage = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"收到消息"</span>, e.data);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>应用比较简单，但有一点需要说明，看起来它只支持get请求，无法传参？如果需要传参，怎么办，有一个包可以帮助我们实现——@microsoft/fetch-event-source。</p>
+<h2 id="File上传"><a href="#File上传" class="headerlink" title="File上传"></a>File上传</h2><p>丰富的网页功能，不仅让用户能输入内容，还要能上传文件。</p>
+<p>在早期，处理文件的唯一方式是把<code>&lt;input type=&quot;file&quot;&gt;</code>放到一个表单里。</p>
+<p>File API 与 Blob API 就是为了让Web开发者更好地与文件交互而设计。它仍然以表单中的文件为基础，但增加了访问文件信息的能力。</p>
+<p><strong>File类型</strong></p>
+<p>HTML5在DOM上为文件输入元素添加了files集合，它包含一组File对象，表示被选中的文件。</p>
+<p>每个File对象都有一些只读属性：name（文件名）；size（文件大小）；type（文件MIME类型）；lastModifiedDate（文件最后修改时间）</p>
+<p><strong>FileReader类型</strong></p>
+<p>File API还提供了FileReader类型，用于从文件中读取数据。</p>
+<p>每个FileReader会发布几个事件，最有用的是progress、error和load。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.readAsText(file);</span><br><span class="line">    <span class="comment">// 还有数据</span></span><br><span class="line">    reader.onprogress = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (e.lengthComputable) &#123;</span><br><span class="line">        <span class="keyword">const</span> percentLoaded = <span class="built_in">Math</span>.round((e.loaded / e.total) * <span class="number">100</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`File loading progress: <span class="subst">$&#123;percentLoaded&#125;</span>%`</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 读取完成</span></span><br><span class="line">    reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'File content:'</span>, reader.result);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 发生错误</span></span><br><span class="line">    reader.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">'Error reading file:'</span>, reader.error);</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>某些情况下，可能需要读取部分文件而不是整个文件。为此，File对象提供了一个名为slice()的方法。</p>
+<p><strong>Blob URL</strong></p>
+<p>有时候你会看到一个blob开头的字符串来展示文件，它就是对象URL，也称作Blob URL，是指引用存储在File或Blob中数据的URL。</p>
+<p>对象URL的优点是不用把文件内容读取到JavaScript也可以使用文件。</p>
+<p>要创建对象URL，可以使用window.URL.createObjectURL()方法并传入File或Blob对象，这个函数返回的值是一个指向内存中地址的字符串，因为这个字符串是URL，所以可以在DOM中直接使用。</p>
+<p><strong>拖拽上传</strong></p>
+<p>除了点击选择上传，将拖放API与File API结合使用，可实现拖拽上传，在页面上创建放置目标后，把文件拖动到放置目标。会触发drop事件，被放置的文件可通过事件的event.dataTransfer.files属性读到。</p>
+<h2 id="图形渲染"><a href="#图形渲染" class="headerlink" title="图形渲染"></a>图形渲染</h2><p>图形图像是网页不可缺少的部分，我们见到所有亮眼、炫酷的效果，都由它来完成，会给网页吸引力加分。</p>
+<p>最常见的img元素，但它只能用来展示图片，想要实现更多，如图形绘制、图片处理，或者复杂动画，就要用到Canvas。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"><span class="comment">// 设定宽高</span></span><br><span class="line">canvas.width = <span class="number">200</span>;</span><br><span class="line">canvas.height = <span class="number">100</span>;</span><br><span class="line"><span class="comment">// 设定填充色</span></span><br><span class="line">ctx.fillStyle = <span class="string">'red'</span>;</span><br><span class="line"><span class="comment">// 绘制矩形</span></span><br><span class="line">ctx.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">180</span>, <span class="number">80</span>);</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(canvas);</span><br></pre></td></tr></table></figure>
+<p>上面这段代码，绘制了一个“红色矩形”，属于图形界的“Hello World”。</p>
+<p>Canvas能做的事情，包括且不限于：画线、各种形状、文本、阴影、渐变、绘制图像、填充图案。</p>
+<p>还有一项重要能力是获取和操作图像数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取图像数据</span></span><br><span class="line"><span class="keyword">const</span> imageData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line"><span class="keyword">const</span> data = imageData.data;</span><br><span class="line"><span class="comment">// 灰度处理</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; data.length; i += <span class="number">4</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> avg = (data[i] + data[i + <span class="number">1</span>] + data[i + <span class="number">2</span>]) / <span class="number">3</span>;</span><br><span class="line">  data[i] = avg;     <span class="comment">// Red</span></span><br><span class="line">  data[i + <span class="number">1</span>] = avg; <span class="comment">// Green</span></span><br><span class="line">  data[i + <span class="number">2</span>] = avg; <span class="comment">// Blue</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修改重新绘制到画布</span></span><br><span class="line">ctx.putImageData(imageData, <span class="number">0</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>当你拿到图像的像素值，就可以为所欲为，当然，需要具备一定的图像知识。</p>
+<p>这是2D绘制，还可以进行3D绘制，是现在很热门的领域，同样是用Canvas，但需要额外用到WebGL，WebGL并不属于W3C标准，且涉及OpenGL语言，超出了常规前端范畴，学习曲线比较陡峭，深入掌握的人少之又少，平时大家常用Three.js等工具库做3D效果展示，这里不再赘述。</p>
+<h2 id="客户端存储"><a href="#客户端存储" class="headerlink" title="客户端存储"></a>客户端存储</h2><p>通常，网页端的数据来自两处：接口获取、代码定义。</p>
+<p>代码中的需考虑维护性、灵活性，同时无法跨项目。</p>
+<p>接口获取的每次需要都得重新请求，消耗时间，特别是更新频率很低时，会造成资源浪费。</p>
+<p>于是，就有客户端存储这样一种机制，将数据暂存在浏览器。</p>
+<p>主要方案有：</p>
+<ul>
+<li><p>cookie：与特定域绑定的，长度有限，数量有限，通常用于存储较简单的值。</p>
+<p>需要注意的是，所有名和值都是URL编码的，须用decodeURIComponent()解码。</p>
+</li>
+<li><p>WebStorage：包括localStorage和sessionStorage。</p>
+<p>localStorage是永久存储机制，sessionStorage是跨会话的存储机制。</p>
+<p>这两种存储方式都不受页面刷新影响，且容量比cookie大得多。</p>
+</li>
+<li><p>IndexedDB：IndexedDB在浏览器层面创建了一个数据库，但它的形式不是表，是对象。</p>
+<p>它的应用通常是大对象或者文件，可省去用户反复上传或者频繁请求的消耗。</p>
+</li>
+</ul>
+<h2 id="富文本编辑"><a href="#富文本编辑" class="headerlink" title="富文本编辑"></a>富文本编辑</h2><p>怎样实现一个可编辑的输入框？</p>
+<p>大部分人的第一反应是input或者textarea，这两种确实比较常用，但它们是单纯用于“输入”，别的干不了。</p>
+<p>还有少部分可能会说contenteditable，能想起这个算不错。</p>
+<p>还有第三种，就是在页面中嵌入一个iframe，给它的designMode属性设置为“on”。</p>
+<p>通常的做法像这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe name=<span class="string">"richedit"</span>&gt;&lt;<span class="regexp">/iframe&gt;;</span></span><br><span class="line"><span class="regexp">window.addEventListener("load", () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">  frames["richedit"].document.designMode = "on";</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br></pre></td></tr></table></figure>
+<p>这样以来，被嵌入的那部分整个都可编辑。</p>
+<p>但只是可编辑并不满足需求，能交互才行，与富文本编辑器交互的方法有两种：</p>
+<p><strong>execCommand()</strong></p>
+<p>它的作用是，将字体变成“粗体、斜体”，或者改变文本背景，添加下划线，插入“p、hr”等元素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'keydown'</span>, (e) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> ((e.ctrlKey || e.metaKey) &amp;&amp; e.key === <span class="string">'b'</span>) &#123;</span><br><span class="line">        e.preventDefault();</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">document</span>.execCommand) &#123;</span><br><span class="line">            <span class="built_in">document</span>.execCommand(<span class="string">'bold'</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意的点是，它用于修改内嵌窗格（iframe）中富文本区域的外观，如果想更加精细地控制当前窗口的文本，要用第二种。</p>
+<p><strong>getSelection()</strong></p>
+<p>这个方法可以获得富文本编辑器的选区，其暴露在document和window对象上，返回表示当前选中文本的Selection对象。</p>
+<p>拿到对象后，其中有特别多的方法可用。直接看代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> selection = <span class="built_in">window</span>.getSelection();</span><br><span class="line"><span class="keyword">if</span> (selection.toString().length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> range = selection.getRangeAt(<span class="number">0</span>); <span class="comment">// 获取选区的第一个范围</span></span><br><span class="line">    <span class="keyword">const</span> selectedText = range.extractContents(); <span class="comment">// 提取选区范围的内容</span></span><br><span class="line">    <span class="keyword">const</span> highlightSpan = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>); <span class="comment">// 创建一个新的 span 元素</span></span><br><span class="line">    highlightSpan.style.backgroundColor = <span class="string">'yellow'</span>; <span class="comment">// 设置 span 元素的背景颜色为黄色</span></span><br><span class="line">    highlightSpan.appendChild(selectedText); <span class="comment">// 将选中文本添加到 span 元素中</span></span><br><span class="line">    range.insertNode(highlightSpan); <span class="comment">// 将 span 元素插入到选区范围中</span></span><br><span class="line">    selection.removeAllRanges(); <span class="comment">// 移除选区的所有范围</span></span><br><span class="line">    selection.addRange(range); <span class="comment">// 将修改后的范围添加回选区</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码实现的是，将鼠标划过选中的文本背景设为黄色。</p>
+<h2 id="JavaScript-API"><a href="#JavaScript-API" class="headerlink" title="JavaScript API"></a>JavaScript API</h2><p>网页的载体是浏览器，产品能实现什么，开发者能做什么，取决于浏览器。</p>
+<p>如今的浏览器已经成为集各种API于一身的“瑞士军刀”，择取一些功能性较强的API给大家。</p>
+<p><strong>Clipboard API</strong></p>
+<p>肯定有人和我一样，得知这个API的时候，才知道在网页端实现复制如此简单。</p>
+<p>其实不是到这个API才具备这个能力，但Clipboard API使得这件事变得简单优雅。</p>
+<p>它通过readText() 和 writeText()方法实现读取和写入字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">navigator.clipboard.readText().then(<span class="function">(<span class="params">text</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"剪贴板内容:"</span>, text);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">navigator.clipboard.writeText(<span class="string">"Hello, World!"</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"剪贴板内容已更新"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>同时，可以有剪贴板事件cut、copy、paste等进行监听。</p>
+<p><strong>跨上下文通信</strong></p>
+<p>跨文档消息，也简称XDM（cross-document messaging），是一种在不同工作线程或不同源的页面间传递信息的能力。</p>
+<p>它的核心是postMessage()方法，接收到XDM消息后，window对象上会触发message事件。</p>
+<p>但最好只通过postMessage()发送字符串。如果需要传递结构化数据，最好先对该数据调用JSON.stringify()，通过postMessage()传过去之后，再在onmessage事件处理程序中调用JSON.parse()。</p>
+<p>除此之外，现在还比较常用的有 MessageChannel() 和 BroadcastChannel()，一个典型场景是，同域名下部署了几个相互独立的项目，要么一个内嵌了另一个，要么在一个页面上产生交互，另一个页面需要接收状态变化，这时候，相互通信的感知能力就很有用。</p>
+<p><strong>Observer API</strong></p>
+<p>开发者所期望的重要能力之一，就是“监听变化”，对变化的监测会产生安全感。</p>
+<p>DOM的变化在很长时间里是无法感知的，直到Observer API的出现。</p>
+<p>现代浏览器支持的观察者有如下几个。</p>
+<p>MutationObserver：监听DOM的修改，用于观察整个文档、DOM子树或者一个元素，还能观察元素属性、子节点、文本等变化。</p>
+<p>ResizeObserver：用于跟踪DOM元素尺寸的变化，适用于响应式Web设计或动态布局更新。</p>
+<p>IntersectionObserver：监听DOM元素相对于指定视口或容器元素的可见性及位置。特别适合实现基于滚动的动画、图片懒加载、无穷滚动等性能优化的实施。</p>
+<p>以MutationObserver为例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> MutationObserver(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> mutation <span class="keyword">of</span> mutationsList) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.type === <span class="string">"childList"</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"A child node has been added or removed."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.type === <span class="string">"attributes"</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"The "</span> + mutation.attributeName + <span class="string">" attribute was modified."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>使用Observer API时，关键要处理好回调的性能，它可能会以惊人的频率执行，从而影响性能。一种方式是防抖，另一种方式是在不需要时把观察者删除。</p>
+<p><strong>Device API</strong></p>
+<p>现代网页需要我们提供细致的个性化设计，而个性化离不开对网页环境和设备的检测，包括且不限于：设备类型、浏览器类型、操作系统等，这时就需要 Device API 的能力。</p>
+<p>主要通过暴露在navigator对象上的一组属性得到，比如：oscpu（系统）、userAgent（浏览器）、orientation（屏幕朝向）等。</p>
+<p>同时，还可通过Connection State 和 Networkinformation API 获取到用户的网络连接情况，以便做出断网或弱网处理，它们同样暴露在navigator上，以及有相应的 online、offline 事件可监听。</p>
+<p><strong>Page Visiblily API</strong></p>
+<p>Web开发中有个常见问题，就是不知道用户当前在使用页面，还是切到别的界面做其他事情去了。</p>
+<p>最常见的场景就是视频网站播广告，你停在当前页面看，它才会播，否则就是浪费资源。</p>
+<p>Page Visibily API就提供了这个能力。</p>
+<p>document.visibilyState有三个值：visible（当前可见）、hidden（不可见）、prerender（页面在预渲染）。</p>
+<p>其中不可见包括“标签页切换”和“最小化”，同时，还可通过 visibilityChange 事件监听可视状态的变化。</p>
+<p><strong>URL API</strong></p>
+<p>这个API的存在让人觉得很贴心，因为你总会需要在URL中携带信息，获取URL信息是特别常见的需求。</p>
+<p>但在之前，需要通过拼接组件、正则匹配、字符串查找等一系列繁琐操作，而URL API 使这件事变得简单。</p>
+<p>你只需要把URL传进去，就能直接获得一系列有价值的信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="keyword">new</span> URL(<span class="string">'https://example.com/8080/page?q1=vall#fragment'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Protocol:'</span>, url.protocol); <span class="comment">// https</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Search Parameters:'</span>, url.search); <span class="comment">// ?q1=vall</span></span><br></pre></td></tr></table></figure>
+<p>其中的参数更是能够直接用过 URL的 searchParams 属性轻易获得和操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> qs = <span class="string">"?q1=vall"</span></span><br><span class="line"><span class="keyword">let</span> searchParams = <span class="keyword">new</span> URLSearchParams(qs);</span><br><span class="line">searchParams.has(q1) <span class="comment">// true</span></span><br><span class="line">searchParams.get(q1) <span class="comment">// vall</span></span><br></pre></td></tr></table></figure>
+<p><strong>计时API</strong></p>
+<p>关于时间，多数人知道Date，但是Date的本意是日期，它更适用于日期相关处理，在时间精度上只能做到毫秒，对一些精度要求更高的场景无法满足。</p>
+<p>于是有了performance，它包含一批API，用在不同场景。</p>
+<p>performance.now()：从0开始计时，返回微妙精度的浮点值。</p>
+<p>performance.mark()：记录自定义性能条目。</p>
+<p>performance.getEntriesByType：度量当前页面加载速度，或者资源加载速度。</p>
+<p>这些能力，可以辅助我们对用户的真实体验数据做收集和分析，以便做针对性的优化。</p>
+<h2 id="工作者线程"><a href="#工作者线程" class="headerlink" title="工作者线程"></a>工作者线程</h2><p>前端开发者常说：“JavaScript是单线程的”。所以经常会面对一个问题—要做的事情太多，浏览器“忙不过来”，产生卡顿。</p>
+<p>工作者线程，就是浏览器可以在原始页面环境之外再分配一个完全独立的二级子环境。这个子环境不能与依赖单线程交互的API（如DOM）互操作，但可以与父环境并行执行代码。</p>
+<p>较为常见的就是“Web Worker”，通常会用来做文件的输入输出，进行密集型计算，处理大数据。</p>
+<p>创建Web Woker的常见方式，是建立一个任务执行脚本，然后把文件路径给Worker构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webWorker = <span class="keyword">new</span> Worker(<span class="string">"worker.js"</span>);</span><br><span class="line">webWorker.postMessage(&#123;</span><br><span class="line">  cmd: <span class="string">"init"</span>,</span><br><span class="line">&#125;);</span><br><span class="line">webWorker.onmessage = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"主线程收到消息"</span>, e.data);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>还有一种常见的称作“Service Worker”（服务工作者线程），类似一个代理服务器，用于拦截外出请求和缓存响应。可以让网页在没有网络连接的时候正常使用。</p>
+<p>它最大的使用场景就是开发离线应用，是开发PWA（渐进式Web应用）的关键技术。</p>
+<h2 id="WebAssembly"><a href="#WebAssembly" class="headerlink" title="WebAssembly"></a>WebAssembly</h2><p>书中并未涉及WebAssembly，但这是前端开发在浏览器变得更强大绕不开的话题。</p>
+<p>正常来说，图片处理、音视频处理、模型应用等都是JavaScript不能办到的，需要借助C++或者Python，但前端要做的话，有没有办法，答案就是WebAssembly。</p>
+<p>比如，可以借助OpenCV.js、FFmpeg.js进行图片和音视频处理，可以借助TensorFlow.js、Transformer.js做模型训练和应用。它们无一例外都用到了WebAssembly。</p>
+<p>所以，WebAssembly的设计目标就是为C/C++、Rust等语言提供高效的编译目标，使其在浏览器中以接近原生性能运行。感兴趣的朋友可进一步拓展学习。</p>
+<h2 id="前方的路"><a href="#前方的路" class="headerlink" title="前方的路"></a>前方的路</h2><p>行文至此，内容很多，每一段内容的取舍都很难，但我相信，通过这些知识，一定会激起你的兴趣，去了解更多知识。</p>
+<p>归根结底，前端能做什么，不取决于语言和API的设计，在不同的人手里，它能发挥不同的威力，所以，你的技术深度，你的创造力，才是它真正的能力边界。</p>
+<p>结束了这个系列，就要开始下一段征程了，会是什么呢，欢迎留言说出你的答案~</p>
+<p>更多好文第一时间接收，可关注公众号：“前端说书匠”</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2025/09/08/javascript_high_level_design_six/" title="JavaScript高级程序设计(第5版)：前端的能力边界" target="_blank" rel="external">https://ideazhao.com/2025/09/08/javascript_high_level_design_six/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2025/10/13/hello_algo_one/" title="Hello 算法：让前端人真正理解算法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2025/08/24/javascript_high_level_design_five/" title="JavaScript高级程序设计(第5版)：代码整洁之道"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>

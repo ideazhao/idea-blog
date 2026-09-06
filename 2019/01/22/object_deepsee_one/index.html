@@ -17,6 +17,7 @@
   <meta http-equiv="window-target" content="_top">
   
   
+  
   <title>纵观JS对象的“简”与“繁”（上） | 灵感之见</title>
   <meta name="description" content="JS这门语言，曾被不少开发者视为玩乐的语言，没有厚度和技术含量的语言，但发展到现在，想必没有人敢再这么说，它能做的事越来越多，所以，这门语言看似知识结构简单，但却在代码的行与行之间藏着很多细节和玄机。 “对象”在JS中是个很有意思的东西，它随处可见，说简单可以很简单，但也可以复杂到让人头皮发麻。 简单如何简单？ var person = new Object(); 这样就可以创建一个名为“pers">
 <meta name="keywords" content="学习、javascript">
@@ -31,12 +32,18 @@
 <meta name="twitter:title" content="纵观JS对象的“简”与“繁”（上）">
 <meta name="twitter:description" content="JS这门语言，曾被不少开发者视为玩乐的语言，没有厚度和技术含量的语言，但发展到现在，想必没有人敢再这么说，它能做的事越来越多，所以，这门语言看似知识结构简单，但却在代码的行与行之间藏着很多细节和玄机。 “对象”在JS中是个很有意思的东西，它随处可见，说简单可以很简单，但也可以复杂到让人头皮发麻。 简单如何简单？ var person = new Object(); 这样就可以创建一个名为“pers">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ideazhao.com/2019/01/22/object_deepsee_one/index.html">
+  <link rel="canonical" href="https://ideazhao.com/2019/01/22/object_deepsee_one/">
   
     <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
   
   
     <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"纵观JS对象的“简”与“繁”（上）","description":"JS这门语言，曾被不少开发者视为玩乐的语言，没有厚度和技术含量的语言，但发展到现在，想必没有人敢再这么说，它能做的事越来越多，所以，这门语言看似知识结构简单，但却在代码的行与行之间藏着很多细节和玄机。 “对象”在JS中是个很有意思的东西，它随处可见，说简单可以很简单，但也可以复杂到让人头皮发麻。 简单 如何简单？ var person = new Objec","datePublished":"2019-01-21T16:00:00.000Z","dateModified":"2019-03-10T02:35:53.873Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2019/01/22/object_deepsee_one/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2019/01/22/object_deepsee_one/","inLanguage":"zh-Hans","keywords":"学习、javascript"}
+  </script>
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -173,7 +180,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -183,7 +190,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -202,10 +209,10 @@
                 <a class="category-link" href="/categories/说书匠/">说书匠</a>
               </p>
               <p class="item-title">
-                <a href="/2025/07/27/javascript_high_level_design_four/" class="title">JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感</a>
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
               </p>
               <p class="item-date">
-                <time datetime="2025-07-26T16:00:00.000Z" itemprop="datePublished">2025-07-27</time>
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
               </p>
             </div>
           </li>
@@ -217,10 +224,10 @@
                 <a class="category-link" href="/categories/说书匠/">说书匠</a>
               </p>
               <p class="item-title">
-                <a href="/2025/06/08/javascript_high_level_design_three/" class="title">JavaScript高级程序设计(第5版)：无处不在的集合</a>
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
               </p>
               <p class="item-date">
-                <time datetime="2025-06-07T16:00:00.000Z" itemprop="datePublished">2025-06-08</time>
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
               </p>
             </div>
           </li>
@@ -232,25 +239,10 @@
                 <a class="category-link" href="/categories/说书匠/">说书匠</a>
               </p>
               <p class="item-title">
-                <a href="/2025/05/11/javascript_high_level_design_two/" class="title">JavaScript高级程序设计(第5版)：程序中的数据表达</a>
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
               </p>
               <p class="item-date">
-                <time datetime="2025-05-10T16:00:00.000Z" itemprop="datePublished">2025-05-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/总结/">总结</a>
-              </p>
-              <p class="item-title">
-                <a href="/2025/04/23/ten_years_reading_record/" class="title">微信读书10年陪伴，当阅读照进现实</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2025-04-22T16:00:00.000Z" itemprop="datePublished">2025-04-23</time>
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
               </p>
             </div>
           </li>
@@ -262,10 +254,25 @@
                 <a class="category-link" href="/categories/说书匠/">说书匠</a>
               </p>
               <p class="item-title">
-                <a href="/2025/03/31/javascript_high_level_design_one/" class="title">JavaScript高级程序设计(第5版)：扎实的基本功是唯一捷径</a>
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
               </p>
               <p class="item-date">
-                <time datetime="2025-03-30T16:00:00.000Z" itemprop="datePublished">2025-03-31</time>
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
               </p>
             </div>
           </li>

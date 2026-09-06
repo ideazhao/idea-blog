@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>《AI工程》：为什么需要RAG和智能体？ | 灵感之见</title>
+  <meta name="description" content="巧妇难为无米之炊。 模型要完成一项任务，既需要指令，也需要足够的信息。  每个快速发展的领域都会出现很多新概念，新概念源于新方案，而新方案来自新需求。 在使用AI的时候，模型和提示词是最常见的，但如果仅靠一问一答无法高效地达成目标呢？ RAG和智能体，就是得力的帮手。 RAGRAG是一种通过从外部记忆源检索相关信息来增强模型生成能力的技术。 简单讲，就是除了手动输入提示词之外的辅助性数据，数据的">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《AI工程》：为什么需要RAG和智能体？">
+<meta property="og:url" content="https://ideazhao.com/2026/07/01/ai_engineering_four/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="巧妇难为无米之炊。 模型要完成一项任务，既需要指令，也需要足够的信息。  每个快速发展的领域都会出现很多新概念，新概念源于新方案，而新方案来自新需求。 在使用AI的时候，模型和提示词是最常见的，但如果仅靠一问一答无法高效地达成目标呢？ RAG和智能体，就是得力的帮手。 RAGRAG是一种通过从外部记忆源检索相关信息来增强模型生成能力的技术。 简单讲，就是除了手动输入提示词之外的辅助性数据，数据的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2026-09-06T13:33:18.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《AI工程》：为什么需要RAG和智能体？">
+<meta name="twitter:description" content="巧妇难为无米之炊。 模型要完成一项任务，既需要指令，也需要足够的信息。  每个快速发展的领域都会出现很多新概念，新概念源于新方案，而新方案来自新需求。 在使用AI的时候，模型和提示词是最常见的，但如果仅靠一问一答无法高效地达成目标呢？ RAG和智能体，就是得力的帮手。 RAGRAG是一种通过从外部记忆源检索相关信息来增强模型生成能力的技术。 简单讲，就是除了手动输入提示词之外的辅助性数据，数据的">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2026/07/01/ai_engineering_four/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"《AI工程》：为什么需要RAG和智能体？","description":"巧妇难为无米之炊。 模型要完成一项任务，既需要指令，也需要足够的信息。 每个快速发展的领域都会出现很多新概念，新概念源于新方案，而新方案来自新需求。 在使用AI的时候，模型和提示词是最常见的，但如果仅靠一问一答无法高效地达成目标呢？ RAG和智能体，就是得力的帮手。 RAG RAG是一种通过从外部记忆源检索相关信息来 增强模型生成能力 的技术。 简单讲，就是","datePublished":"2026-06-30T16:00:00.000Z","dateModified":"2026-09-06T13:33:18.890Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2026/07/01/ai_engineering_four/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2026/07/01/ai_engineering_four/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RAG"><span class="toc-number">1.</span> <span class="toc-text">RAG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#检索与生成"><span class="toc-number">1.1.</span> <span class="toc-text">检索与生成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能体"><span class="toc-number">2.</span> <span class="toc-text">智能体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工具"><span class="toc-number">2.1.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规划"><span class="toc-number">2.2.</span> <span class="toc-text">规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反思"><span class="toc-number">2.3.</span> <span class="toc-text">反思</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记忆"><span class="toc-number">3.</span> <span class="toc-text">记忆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">4.</span> <span class="toc-text">结语</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-ai_engineering_four" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《AI工程》：为什么需要RAG和智能体？
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/07/01/ai_engineering_four/" class="article-date">
+	  <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/07/01/ai_engineering_four/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>巧妇难为无米之炊。</p>
+<p>模型要完成一项任务，既需要指令，也需要足够的信息。</p>
+</blockquote>
+<p>每个快速发展的领域都会出现很多新概念，新概念源于新方案，而新方案来自新需求。</p>
+<p>在使用AI的时候，模型和提示词是最常见的，但如果仅靠一问一答无法高效地达成目标呢？</p>
+<p>RAG和智能体，就是得力的帮手。</p>
+<h2 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h2><p>RAG是一种通过从外部记忆源检索相关信息来<strong>增强模型生成能力</strong>的技术。</p>
+<p>简单讲，就是除了手动输入提示词之外的辅助性数据，数据的来源可以是内部数据库、用户的聊天记录或互联网。</p>
+<p>术语RAG最早出现在论文“Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks”（2020）中。</p>
+<p>该论文提出将RAG作为<strong>知识密集型任务</strong>的解决方案，原因就是，在这类任务中<strong>无法将所有可用知识直接输入模型</strong>。</p>
+<p>那么RAG系统是怎么工作的呢？</p>
+<h3 id="检索与生成"><a href="#检索与生成" class="headerlink" title="检索与生成"></a>检索与生成</h3><p>一个RAG系统包含两个部分：从外部记忆源检索信息的<strong>检索器</strong>（retriever），基于检索信息生成响应的<strong>生成器</strong>（generator）。</p>
+<p>RAG系统的成败取决于检索器的质量。检索器有两个主要功能：<strong>索引</strong>和<strong>查询</strong>。</p>
+<p>索引是对数据进行处理，以便之后能够快速检索。查询是指根据输入的问题检索出与之相关的数据。</p>
+<p>举个例子，假设外部记忆源是一个文档数据库，可能包含10个token，也可能是100万个，如果直接检索整个文档，可能会导致上下文长度过度膨胀。为了避免这种情况，可以将每个文档拆分成更易处理的块（chunk）。对于每个查询，我们的目标是检索与该查询最相关的数据块。</p>
+<p>将检索到的数据块与用户的输入组合起来，生成最终的提示词，再将提示词输入生成式模型，就是一个<strong>最简的RAG工作流程</strong>。</p>
+<p>运用RAG，只有与查询最相关的信息才会被提取并输入模型。</p>
+<p>这样以来，不仅减少了token消耗，还可以帮助模型生成更详细的响应，减少幻觉现象，提升模型的性能。</p>
+<h2 id="智能体"><a href="#智能体" class="headerlink" title="智能体"></a>智能体</h2><p>业界普遍认为智能体是AI的终极形态。那么智能体是什么？</p>
+<p>早在90年代，Stuart Russell和Peter Norvig在经典著作《Artificial Intelligence: A Modern Approach》中，将AI研究定义为“对理性智能体的研究与设计”。</p>
+<p>当时看来，那还是个宏伟且难以想象的目标。今天，基础模型所展现的前所未有的能力使其逐渐成为现实。</p>
+<p>智能体，是任何能够感知其环境并作用于环境的事物。</p>
+<p>这意味着，它<strong>不是某个具体的物品，也不是某个特定的软件</strong>，而是一类能够应对不同场景，解决不同问题的程序的统称。</p>
+<p>很像“人”？没错，面对一项任务，人怎么做，它就要怎么做：接收信息，规划动作，接收反馈，判断任务是否完成。</p>
+<p>说白了，智能体的职责就是替人做事，而且不需要手把手教，一步步跟。</p>
+<p>既然如此，它就不能“两手空空”，要有做事的<strong>工具</strong>，且具备一定的<strong>规划</strong>能力。</p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>就模型本身而言，通常只能执行单一类型的动作，要么生成文本，要么生成图像，这会使模型的能力受限，外部工具则可以极大拓展智能体的能力边界。</p>
+<p>常见的工具有三类：</p>
+<p><strong>知识增强</strong>：如联网搜索。网页浏览是最早被集成到ChatGPT等聊天机器人中的功能之一，可以防止模型信息过时。</p>
+<p><strong>能力扩展</strong>：如数学插件。众所周知，基于预测的工作机制，AI模型在数学计算方面表现不佳，如果模型能使用计算器，问题迎刃而解。</p>
+<p><strong>写入动作</strong>：如辅助编程。关于模型的讨论，最多的是信息的读取和查询，但借助工具它也可以执行写入动作，从而修改授权范围内的数据源，这是一种更加强大且能明显提效的能力。</p>
+<h3 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h3><p>复杂任务通常需要规划，有效的规划要求模型理解任务、考虑不同方案，并从中选择最好的。</p>
+<p>那么你的系统就需要：生成计划，验证计划，执行计划。这三种能力。</p>
+<p><strong>规划的核心是搜索</strong>。你需要在通往目标的不同路径之间进行搜索，预测每条路径的结果，并选择最有希望的路径。</p>
+<p>因此，搜索通常需要回溯。回溯的意思是，允许走回头路。</p>
+<p>假设你有A、B两个选择，在执行A后，发现结果不理想，这时需要回到之前的状态，转而选择B。</p>
+<p>怎样知道A的结果不理想呢？这就要求系统不仅要了解可用的动作，还要知道每个动作可能产生的结果。</p>
+<p>模型的海量训练数据对这一需求提供了支撑，但仍难免出现不理想的情况，这个时候，提示词优化和模型微调就派上了用场。</p>
+<h3 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h3><p>即使是最好的计划，也需要不断评估和调整，以提升成功的可能性。</p>
+<p>反思在任务执行的多个环节都很有用。</p>
+<ul>
+<li>收到查询后，评估请求是否可行。</li>
+<li>计划生成后，评估计划是否合理。</li>
+<li>每一步执行后，评估当前执行是否处于正确的轨道。</li>
+<li>整个计划执行完毕后，判断任务是否真正完成。</li>
+</ul>
+<p>反思与错误修正是两种相辅相成的机制：<strong>反思产生洞见，有助于发现需要纠正的错误</strong>。</p>
+<p>一旦智能体未能完成任务，你可以提示它进行反思，并给出改进思路，从而实现“从错误中学习”。</p>
+<h2 id="记忆"><a href="#记忆" class="headerlink" title="记忆"></a>记忆</h2><p>记忆是指模型保留和利用信息的机制。</p>
+<p>如果你正在进行一个复杂的任务，和AI进行多轮次对话，它却做了后面忘了前面，将是灾难性的。</p>
+<p>记忆机制主要有三种：</p>
+<p><strong>内部知识</strong>：来自模型自身，除非模型更新，否则不会改变。</p>
+<p><strong>短期记忆</strong>：模型的上下文。对话中的历史消息可被添加到模型的上下文中供后续使用。</p>
+<p><strong>长期记忆</strong>：模型通过检索访问的外部数据源（例如RAG系统）。</p>
+<p>选择哪种机制，取决于数据的使用频率，这就涉及到记忆的管理策略。</p>
+<p>这和开发者熟知的“缓存”如出一辙，人们总会在需要处理大量数据的场景下尽可能的利用“记忆”去提升检索的质量和效率。</p>
+<p>最简单的策略是FIFO（first in first out，先进先出）。 这种策略假设早期的消息与当前的讨论相关性较低，但它不总是对的，尤其在长对话过程中，最早的消息往往包含最关键的目标信息，这时候就需要转而选择其他更合适的策略。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>综上所述，使用RAG和智能体的过程可能耗费大量的时间和金钱。也有一定门槛，但正所谓“磨刀不误砍柴工”，如果做一些额外的工作能够显著增强模型的能力，且可以自主运行，就能节省大量的人力时间，物有所值。</p>
+<p>权衡的艺术再次得到体现。</p>
+<p>更多好文第一时间收到，欢迎关注公众号：“前端说书匠”。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2026/07/01/ai_engineering_four/" title="《AI工程》：为什么需要RAG和智能体？" target="_blank" rel="external">https://ideazhao.com/2026/07/01/ai_engineering_four/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/07/15/ai_engineering_five/" title="《AI工程》：构建应用，你准备好了吗？（决策篇）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2026/06/09/ai_engineering_three/" title="《AI工程》：高质量提示词怎样设计？"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>

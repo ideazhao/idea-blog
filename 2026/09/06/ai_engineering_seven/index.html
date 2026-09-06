@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>《AI工程》：模型选择，微调与数据集（深度篇） | 灵感之见</title>
+  <meta name="description" content="确定可实现的最佳性能，在成本与性能之间进行权衡。  前两篇文章，我们讨论了产品决策，浅聊了开发技术，如果不来点更深入的硬菜，对开发人员不太过瘾，上菜~ 模型选择随着越来越多的公司入局AI，市面上的模型已经非常多，而且保持着较高的更新频率，那么着手开发的时候，该怎么做选择？ 事实上，你需要关心的不是哪个模型最好，好与不好没有绝对标准，你需要关注哪个模型最适合你的应用。 同时，模型的类型也因开发阶段">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《AI工程》：模型选择，微调与数据集（深度篇）">
+<meta property="og:url" content="https://ideazhao.com/2026/09/06/ai_engineering_seven/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="确定可实现的最佳性能，在成本与性能之间进行权衡。  前两篇文章，我们讨论了产品决策，浅聊了开发技术，如果不来点更深入的硬菜，对开发人员不太过瘾，上菜~ 模型选择随着越来越多的公司入局AI，市面上的模型已经非常多，而且保持着较高的更新频率，那么着手开发的时候，该怎么做选择？ 事实上，你需要关心的不是哪个模型最好，好与不好没有绝对标准，你需要关注哪个模型最适合你的应用。 同时，模型的类型也因开发阶段">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2026-09-06T13:33:18.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《AI工程》：模型选择，微调与数据集（深度篇）">
+<meta name="twitter:description" content="确定可实现的最佳性能，在成本与性能之间进行权衡。  前两篇文章，我们讨论了产品决策，浅聊了开发技术，如果不来点更深入的硬菜，对开发人员不太过瘾，上菜~ 模型选择随着越来越多的公司入局AI，市面上的模型已经非常多，而且保持着较高的更新频率，那么着手开发的时候，该怎么做选择？ 事实上，你需要关心的不是哪个模型最好，好与不好没有绝对标准，你需要关注哪个模型最适合你的应用。 同时，模型的类型也因开发阶段">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2026/09/06/ai_engineering_seven/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"《AI工程》：模型选择，微调与数据集（深度篇）","description":"确定可实现的最佳性能，在成本与性能之间进行权衡。 前两篇文章，我们讨论了产品决策，浅聊了开发技术，如果不来点更深入的硬菜，对开发人员不太过瘾，上菜~ 模型选择 随着越来越多的公司入局AI，市面上的模型已经非常多，而且保持着较高的更新频率，那么着手开发的时候，该怎么做选择？ 事实上，你需要关心的不是哪个模型最好，好与不好没有绝对标准，你需要关注哪个模型 最适合","datePublished":"2026-09-05T16:00:00.000Z","dateModified":"2026-09-06T13:33:18.891Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2026/09/06/ai_engineering_seven/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2026/09/06/ai_engineering_seven/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模型选择"><span class="toc-number">1.</span> <span class="toc-text">模型选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#评估方法"><span class="toc-number">1.0.1.</span> <span class="toc-text">评估方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开源模型与API"><span class="toc-number">1.0.2.</span> <span class="toc-text">开源模型与API</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微调"><span class="toc-number">2.</span> <span class="toc-text">微调</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RAG还是微调"><span class="toc-number">2.0.1.</span> <span class="toc-text">RAG还是微调</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存瓶颈"><span class="toc-number">2.0.2.</span> <span class="toc-text">内存瓶颈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PEFT"><span class="toc-number">2.0.3.</span> <span class="toc-text">PEFT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微调策略"><span class="toc-number">2.0.4.</span> <span class="toc-text">微调策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据集"><span class="toc-number">3.</span> <span class="toc-text">数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据质量"><span class="toc-number">3.0.1.</span> <span class="toc-text">数据质量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据覆盖度"><span class="toc-number">3.0.2.</span> <span class="toc-text">数据覆盖度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据量"><span class="toc-number">3.0.3.</span> <span class="toc-text">数据量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据获取"><span class="toc-number">3.0.4.</span> <span class="toc-text">数据获取</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-ai_engineering_seven" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《AI工程》：模型选择，微调与数据集（深度篇）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/09/06/ai_engineering_seven/" class="article-date">
+	  <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/09/06/ai_engineering_seven/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>确定可实现的最佳性能，在成本与性能之间进行权衡。</p>
+</blockquote>
+<p>前两篇文章，我们讨论了产品决策，浅聊了开发技术，如果不来点更深入的硬菜，对开发人员不太过瘾，上菜~</p>
+<h2 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h2><p>随着越来越多的公司入局AI，市面上的模型已经非常多，而且保持着较高的更新频率，那么着手开发的时候，该怎么做选择？</p>
+<p>事实上，你需要关心的不是哪个模型最好，好与不好没有绝对标准，你需要关注哪个模型<strong>最适合</strong>你的应用。</p>
+<p>同时，模型的类型也因开发阶段的不同而不同。</p>
+<p>如果只是调整提示词，可以先使用性能最强的模型评估可行性，再逐步缩小量级。</p>
+<p>如果已经决定微调，可以先用一个小模型做测试，再逐步转向符合硬件限制的最大模型。</p>
+<p>整体策略为：<strong>确定可实现的最佳性能，在成本与性能之间进行权衡</strong>。</p>
+<h4 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h4><p>考察模型时，区分什么可以改变（硬属性），什么难以改变（软属性）。难以改变的因素（如协议、控制权）会<strong>大幅缩小可选模型的范围</strong>，而可以改变的因素提供了优化空间。</p>
+<p>评估工作流包括：</p>
+<p>1、剔除硬属性不符合需求的。</p>
+<p>2、利用公开信息（基准测试和排行榜），确定最具潜力的。</p>
+<p>3、使用自身业务流水线进行实验，找到最合适的。</p>
+<p>4、持续监控，及时发现问题，以改进应用。</p>
+<h4 id="开源模型与API"><a href="#开源模型与API" class="headerlink" title="开源模型与API"></a>开源模型与API</h4><p><strong>开源模型：</strong> 指任何人都可以下载和使用，且训练数据也公开的模型。</p>
+<p><strong>API：</strong> 托管并运行模型，能接收用户请求、生成响应，并将结果返回给用户的服务，称为推理服务。用户与之交互的接口称为模型 API。</p>
+<p>通常，模型提供商会开源性能较弱的模型，而将性能最强的模型通过 API 付费使用。</p>
+<p>模型 API 可以通过模型提供商、云服务提供商或第三方提供商获取。</p>
+<p>开源模型可以由任何 API 提供商支持，选择自由度更高，商业模型只能通过模型开发者授权的 API 访问。</p>
+<p>需要注意的是，<strong>API 通常按用量收费</strong>，大量使用时可能导致成本快速膨胀，而在使用模型或者API时，还需要考虑数据隐私和知识产权等问题。</p>
+<h2 id="微调"><a href="#微调" class="headerlink" title="微调"></a>微调</h2><p>微调始于一个基座模型，该模型已具备目标任务所需的部分能力。微调的目的是让其<strong>在特定任务中表现更好</strong>。</p>
+<p>一个常见现象是，在基准测试中表现优异的通用模型，未必能胜任你的任务，此时微调将格外有效。比如，你的应用需要输出特定结构（如 JSON 或 YAML 格式）。</p>
+<p>另一个极具价值的应用是<strong>缓解偏见</strong>，原理是，让基座模型接触经过精心筛选的数据，来抵消历史数据造成的偏见。</p>
+<p>与基于提示词的方法相比，<strong>微调需要更多的资源</strong>，不仅包括数据和硬件资源，还包括机器学习领域的专业人才。因此，通常建议在充分尝试提示工程之后再考虑微调。</p>
+<h4 id="RAG还是微调"><a href="#RAG还是微调" class="headerlink" title="RAG还是微调"></a>RAG还是微调</h4><p>除了微调，RAG也是我们介绍过的提升模型表现的一种手段，具体用哪种，取决于模型面临的问题是<strong>信息缺失</strong>还是<strong>行为表现</strong>。</p>
+<p>信息缺失意味着没有相关信息，或者信息过时。</p>
+<p>行为表现指模型输出的内容虽然事实正确，但与任务要求不符。</p>
+<p>如果是信息缺失，RAG系统可以有效解决问题。如果存在行为问题，微调可能更有效。</p>
+<h4 id="内存瓶颈"><a href="#内存瓶颈" class="headerlink" title="内存瓶颈"></a>内存瓶颈</h4><p>由于基础模型的规模庞大，内存成为制约其应用的主要瓶颈，了解模型所需的内存有助于<strong>选择合适的硬件</strong>。</p>
+<p>内存的计算公式为：</p>
+<p>内存=模型权重所需的内存+激活值所需的内存+梯度所需的内存+优化器状态所需的内存</p>
+<p>影响内存占用的因素：</p>
+<ol>
+<li>微调涉及神经网络训练，内存需求远高于推理。</li>
+<li>模型参数量、可训练参数量及数值表示精度。</li>
+</ol>
+<p>模型的内存占用取决于模型本身、工作负载和用于减少内存使用的各种优化技术，会随着模型规模的增大而迅速增加。</p>
+<p>如果一个模型的推理需要 30 GB 内存，24 GB 内存的芯片就无法满足需求。</p>
+<h4 id="PEFT"><a href="#PEFT" class="headerlink" title="PEFT"></a>PEFT</h4><p>早期阶段，模型规模较小，人们可以对整个模型进行微调，称为<strong>全量微调</strong>。</p>
+<p>在全量微调中，可训练参数量与模型参数量完全相同。参数量越大，内存占用就越大。</p>
+<p>如何在大幅减少可训练参数的同时，达到接近全量微调的性能？人们提出了 PEFT 技术。</p>
+<p>PEFT 方案通过在模型的合适位置插入额外的参数，用少量的可训练参数实现强大的微调性能。</p>
+<p>这里有个说法叫<strong>参数高效</strong>，如果一种技术能在使用比全量微调少几个数量级的可训练参数的情况下，达到接近全量微调的性能，就认为是参数高效的。</p>
+<p><strong>PEFT 使得在更经济的硬件上进行微调成为可能</strong>。</p>
+<h4 id="微调策略"><a href="#微调策略" class="headerlink" title="微调策略"></a>微调策略</h4><p>OpenAI 的最佳实践给出了两种开发路径。</p>
+<p><strong>渐进路径</strong>：</p>
+<ol>
+<li>使用成本最低、最快的模型测试微调代码，确保运行无误。</li>
+<li>使用中等规模的模型验证数据质量。如果训练损失未随数据量增加而下降，说明数据可能存在问题。</li>
+<li>使用最好的模型进行几次实验，探索性能提升的极限。</li>
+<li>一旦获得良好的结果，就使用所有模型进行一次训练，以绘制成本-性能曲线，并选出最适合实际场景的模型。</li>
+</ol>
+<p><strong>蒸馏路径</strong>：</p>
+<ol>
+<li>基于小规模数据集，使用预算范围内最强大的模型训练出尽可能好的模型。</li>
+<li>使用微调后的模型生成更多的训练数据。</li>
+<li>使用新的数据集训练一个成本更低的模型。</li>
+</ol>
+<p>最简单的微调方式是使用微调 API，你只需上传数据并选择基座模型即可。</p>
+<p>与模型推理 API 类似，微调 API 可以由模型提供商、云服务提供商或第三方提供。这种方法的局限性在于你只能使用 API 所支持的基座模型。此外，API 可能不会提供所有可用于优化微调性能的参数选项。因此，微调 API 适合希望快速、便捷地完成任务的用户，对于想要更多自定义选项的用户可能受限。</p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><strong>模型的质量取决于训练数据的质量</strong>。没有高质量的数据，即使拥有顶尖的团队和无限的计算资源，也无法微调出优秀的模型。</p>
+<p>人们对数据关注程度的日益增加，使得数据相关工作已经从顺带处理的边缘任务演变为专职专岗，同时催生了以数据为中心的AI，它与以模型为中心的AI形成鲜明对比。</p>
+<p>以<strong>模型</strong>为中心，侧重于优化模型，包括设计新架构、扩大模型规模或开发新的训练技术。</p>
+<p>以<strong>数据</strong>为中心，侧重于优化数据，包括开发新的数据处理技术和创建高质量的数据集。</p>
+<p>在深度学习发展早期，许多 AI 基准测试是以模型为中心的。例如给定 ImageNet 数据集，人们<strong>使用相同的数据集训练出性能最佳的模型</strong>。</p>
+<p>近年来，越来越多的基准测试转向以数据为中心：给定相同的模型，人们尝试<strong>开发能让该模型表现最好的数据集</strong>。</p>
+<p>在实际应用中，要取得实质性的技术进步，通常需要同时在模型和数据两个方面进行投入。</p>
+<p>优质数据可以使模型更强大、更安全，并能处理更长的上下文。相反，劣质数据可能导致模型偏见加剧、幻觉现象增多。数据中的错误不仅会损害模型性能，还会浪费资源。</p>
+<p>需要的数据类型取决于具体任务和模型的学习目标。整体来看，遵循三大标准：数据质量、数据覆盖度和数据量。</p>
+<h4 id="数据质量"><a href="#数据质量" class="headerlink" title="数据质量"></a>数据质量</h4><p>少量高质量的数据往往优于大量含噪数据。</p>
+<p>所谓高质量数据，是能帮助你<strong>高效、可靠</strong>地完成工作的数据。</p>
+<p>一般具备六大特征：</p>
+<ul>
+<li>与训练任务紧密相关。</li>
+<li>符合任务的具体要求。</li>
+<li>在不同样本和标注员之间保持一致。</li>
+<li>遵循预期的格式要求。</li>
+<li>足够独特。</li>
+<li>合规。</li>
+</ul>
+<h4 id="数据覆盖度"><a href="#数据覆盖度" class="headerlink" title="数据覆盖度"></a>数据覆盖度</h4><p>训练数据应覆盖其预期解决的所有问题范围。</p>
+<p>现实世界中的用户通常面临各种各样的问题，表达问题的方式也千差万别。因此，能够<strong>捕捉应用多样化使用模式</strong>，对于提升模型性能至关重要。</p>
+<p>不同的应用对数据多样性的维度要求各异。比如：翻译工具不需要语言多样性，要的是精准，但会受益于风格多样性。面向全球客户推荐产品的聊天机器人不一定需要领域多样性，但语言多样性和文化多样性非常重要。</p>
+<h4 id="数据量"><a href="#数据量" class="headerlink" title="数据量"></a>数据量</h4><p>询问模型需要多少数据，就像询问人需要多少钱一样，因情况而异。</p>
+<p>主要三个因素：</p>
+<p><strong>微调范围：</strong> 全量微调通常能带来最佳性能，但所需的数据量比PEFT高几个量级。</p>
+<p><strong>任务复杂度：</strong> 简单任务所需的数据量远少于复杂任务。</p>
+<p><strong>基座模型的性能：</strong> 基座模型的性能越接近目标性能，所需的样本量就越少。</p>
+<p>简而言之，如果数据量较少，可以考虑对更先进的模型使用PEFT方法；如果数据量较多，则可以对较小的模型进行全量微调。</p>
+<h4 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h4><p>数据获取的目标是生成一个<strong>规模足够大且质量和多样性符合需求</strong>的数据集，同时确保数据处理方式尊重用户隐私并符合相关法规。</p>
+<p><strong>最重要的数据通常源自你自己的应用</strong>，因为它与你的任务高度契合，这在其他数据源中极难实现。如果能利用用户生成的数据不断改进产品，你将获得巨大的竞争优势。</p>
+<p>当然，这肯定不是唯一方案，实际应用中，需要采用组合搭配的方式，通过多个渠道，从多个数据源获取数据。</p>
+<p>还有一种方式，是直接使用<strong>公开数据集</strong>：</p>
+<ol>
+<li>Hugging Face和Kaggle托管的数据集。</li>
+<li>谷歌数据集搜索工具——Dataset Search。</li>
+<li>Open Data Network提供了几万个数据集。</li>
+<li>云服务提供商，最著名的是AWS的Open Data。</li>
+<li>机器学习框架通常内置小型数据集，可以直接加载，例如TensorFlow Datasets。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>AI工程系列终于迎来收尾。</p>
+<p>我们从介绍大模型、提示词，到讲解RAG和智能体，再到开发应用的准备工作，最终完成模型开发相关专业概念的深度探秘。</p>
+<p>既考虑到普通用户的知识盲点，又考虑到正在进行AI应用开发，但对相关考量因素感到迷茫的开发者。</p>
+<p>内容不涉及任一款应用和任一家模型提供商，因此具备普适性，也不易过时，这也是选择它的原因。</p>
+<p>马上到来的下个系列，我们重点进入实操，请拭目以待~</p>
+<p>更多好文章第一时间接收，关注公众号：“前端说书匠”</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2026/09/06/ai_engineering_seven/" title="《AI工程》：模型选择，微调与数据集（深度篇）" target="_blank" rel="external">https://ideazhao.com/2026/09/06/ai_engineering_seven/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2026/07/28/ai_engineering_six/" title="《AI工程》：构建应用，需要哪些技术？（解惑篇）"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>

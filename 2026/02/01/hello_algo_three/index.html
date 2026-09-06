@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>Hello 算法：微博热搜的背后 | 灵感之见</title>
+  <meta name="description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》 截至本文编辑时，hello-algo项目Star数已飙升至122k，文末参与活动，获赠微信读书付费会员。  每天一睁眼，新闻头条、微博热搜都能抓住很多人的目光，购物时也会有商品排行榜，它们无形中对我们的注意力和决策产生重要影响。 那么，生活中随处可见的排行榜，在程序里如何做到">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello 算法：微博热搜的背后">
+<meta property="og:url" content="https://ideazhao.com/2026/02/01/hello_algo_three/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》 截至本文编辑时，hello-algo项目Star数已飙升至122k，文末参与活动，获赠微信读书付费会员。  每天一睁眼，新闻头条、微博热搜都能抓住很多人的目光，购物时也会有商品排行榜，它们无形中对我们的注意力和决策产生重要影响。 那么，生活中随处可见的排行榜，在程序里如何做到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/9305ba4b2bbc491c9dbc3ed176e82ee4~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1789297877&x-signature=GW0eulHGaS4jmwC7xnSGzszQc00%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/82cfeb937cf644bdbcd4311b3d9e4ef4~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1789297877&x-signature=cPGqqEsvwjS1fpVOg5kDcHfy%2BCQ%3D">
+<meta property="og:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e4906559609340bf90bae55c8bc9c919~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1789297877&x-signature=JVK7MK8ILy2xAyngfI2yD8bHq1g%3D">
+<meta property="og:updated_time" content="2026-09-06T13:33:18.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello 算法：微博热搜的背后">
+<meta name="twitter:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》 截至本文编辑时，hello-algo项目Star数已飙升至122k，文末参与活动，获赠微信读书付费会员。  每天一睁眼，新闻头条、微博热搜都能抓住很多人的目光，购物时也会有商品排行榜，它们无形中对我们的注意力和决策产生重要影响。 那么，生活中随处可见的排行榜，在程序里如何做到">
+<meta name="twitter:image" content="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/9305ba4b2bbc491c9dbc3ed176e82ee4~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&x-expires=1789297877&x-signature=GW0eulHGaS4jmwC7xnSGzszQc00%3D">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2026/02/01/hello_algo_three/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Hello 算法：微博热搜的背后","description":"每个系列一本前端好书，帮你轻松学重点。 本系列来自上海交通大学硕士，华为高级算法工程师 靳宇栋 的 《Hello，算法》 截至本文编辑时，hello-algo项目Star数已飙升至 122k ，文末参与活动，获赠微信读书付费会员。 每天一睁眼，新闻头条、微博热搜都能抓住很多人的目光，购物时也会有商品排行榜，它们无形中对我们的注意力和决策产生重要影响。 那么，","datePublished":"2026-01-31T16:00:00.000Z","dateModified":"2026-09-06T13:33:18.887Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2026/02/01/hello_algo_three/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2026/02/01/hello_algo_three/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/09/06/ai_engineering_seven/" class="title">《AI工程》：模型选择，微调与数据集（深度篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished">2026-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/28/ai_engineering_six/" class="title">《AI工程》：构建应用，需要哪些技术？（解惑篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-27T16:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/15/ai_engineering_five/" class="title">《AI工程》：构建应用，你准备好了吗？（决策篇）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-07-14T16:00:00.000Z" itemprop="datePublished">2026-07-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/07/01/ai_engineering_four/" class="title">《AI工程》：为什么需要RAG和智能体？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-30T16:00:00.000Z" itemprop="datePublished">2026-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/06/09/ai_engineering_three/" class="title">《AI工程》：高质量提示词怎样设计？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-06-08T16:00:00.000Z" itemprop="datePublished">2026-06-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#直觉"><span class="toc-number">1.</span> <span class="toc-text">直觉</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、遍历"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、先排后选"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、先排后选</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#痛点"><span class="toc-number">2.</span> <span class="toc-text">痛点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识“堆”"><span class="toc-number">3.</span> <span class="toc-text">初识“堆”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么是它"><span class="toc-number">4.</span> <span class="toc-text">为什么是它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#核心代码"><span class="toc-number">5.</span> <span class="toc-text">核心代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入堆"><span class="toc-number">6.</span> <span class="toc-text">入堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出堆"><span class="toc-number">7.</span> <span class="toc-text">出堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-K的堆实现"><span class="toc-number">8.</span> <span class="toc-text">Top-K的堆实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他应用"><span class="toc-number">9.</span> <span class="toc-text">其他应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">10.</span> <span class="toc-text">小结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hello_algo_three" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hello 算法：微博热搜的背后
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/02/01/hello_algo_three/" class="article-date">
+	  <time datetime="2026-01-31T16:00:00.000Z" itemprop="datePublished">2026-02-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/02/01/hello_algo_three/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>每个系列一本前端好书，帮你轻松学重点。</p>
+<p>本系列来自上海交通大学硕士，华为高级算法工程师 <strong>靳宇栋</strong> 的 <strong>《Hello，算法》</strong></p>
+<p>截至本文编辑时，hello-algo项目Star数已飙升至<strong>122k</strong>，文末参与活动，获赠微信读书付费会员。</p>
+</blockquote>
+<p>每天一睁眼，新闻头条、微博热搜都能抓住很多人的目光，购物时也会有商品排行榜，它们无形中对我们的注意力和决策产生重要影响。</p>
+<p>那么，生活中随处可见的排行榜，在程序里如何做到，算法又叫什么呢？</p>
+<p>它就是“Top-K”。什么是“Top-K”?</p>
+<p><strong>给定一个长度为n的无序数组 nums ，返回数组中最大的K个元素。</strong></p>
+<p>怎样从海量数据中找出Top-K？</p>
+<h2 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h2><h4 id="1、遍历"><a href="#1、遍历" class="headerlink" title="1、遍历"></a>1、遍历</h4><p>从所有数据中找，每轮找出剩余数据中最大的。比如：</p>
+<blockquote>
+<p>1 10 3 5 13 7 9 15 18</p>
+</blockquote>
+<p>这样一组数，找出Top3的步骤：第一轮找出18，第二轮找出15，第三轮找出13，以此类推，要找Top几就要找几轮，时间复杂度为 O(n²)。</p>
+<h4 id="2、先排后选"><a href="#2、先排后选" class="headerlink" title="2、先排后选"></a>2、先排后选</h4><p>既然要找Top-K，把整个都排一遍，变成有序的，再从中取前K个，也能达到目的。</p>
+<p>这种方案的时间复杂度为 O（nlog n）。</p>
+<p>可能还有人对复杂度没有概念，我们直观比较一下：</p>
+<table>
+<thead>
+<tr>
+<th>数据量(n)</th>
+<th>O(n log n)</th>
+<th>O(n²)</th>
+<th>倍差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>~33</td>
+<td>100</td>
+<td>3倍</td>
+</tr>
+<tr>
+<td>100</td>
+<td>~664</td>
+<td>10,000</td>
+<td>15倍</td>
+</tr>
+<tr>
+<td>1,000</td>
+<td>~9,966</td>
+<td>1,000,000</td>
+<td>100倍</td>
+</tr>
+<tr>
+<td>10,000</td>
+<td>~132,877</td>
+<td>100,000,000</td>
+<td>752倍</td>
+</tr>
+<tr>
+<td>100,000</td>
+<td>~1,660,964</td>
+<td>10,000,000,000</td>
+<td>6,018倍</td>
+</tr>
+</tbody>
+</table>
+<p>这么看，随着数量级的跃升，方案二优势越来越大，提升已经十分明显。</p>
+<p>还有优化空间么？</p>
+<h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><p>1、遍历方案</p>
+<p>简单，但效率低。只有在待排数量K和总数N之间差距较大时，能勉强接受，如果K和N接近，时间复杂度就趋向于O（n²），非常耗时。</p>
+<p>2、先排后选</p>
+<p>看起来已经不错，但不难发现，我们要找的是Top-K，不是Top-N，它做了<strong>多余的工作。</strong></p>
+<p>当K和N的差距越大，多余工作越多，二者相等时，就是纯排序了。</p>
+<p>此外，实际上对我们有用的只是前K个元素，而不是全部的N个元素，这种方案对<strong>内存也造成浪费</strong>。</p>
+<p>可见，从直觉而来的方法，虽然易上手，但不够好，我们要做的，就是 <strong>“升级”直觉</strong>。</p>
+<p>那么，谁最适合用来解决Top-K问题？</p>
+<h2 id="初识“堆”"><a href="#初识“堆”" class="headerlink" title="初识“堆”"></a>初识“堆”</h2><p>关于“堆”，其实你也很熟悉，“土堆、沙子堆、垃圾堆”，下面要讲的“堆”和它们没有本质区别。就像这样：</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/9305ba4b2bbc491c9dbc3ed176e82ee4~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1789297877&amp;x-signature=GW0eulHGaS4jmwC7xnSGzszQc00%3D" alt="image"></p>
+<p>你可能会说：这不是树吗？</p>
+<p>没错，通常来说，树应该是根在下，叶子在上，但在算法中一般是倒过来看，倒过来后它本身就很像是一个，堆…</p>
+<p>堆是一种满足特定条件的完全二叉树，问题来了，什么是“完全二叉树”…打住！</p>
+<p>我们不能陷入由一个问题带来另一个问题的循环中，只需要关注当下的关键目标。</p>
+<p>堆满足的特定条件是：节点间需要固定的相对大小关系，一个节点要么比父大，要么比父小，由此划分为“<strong>大顶堆</strong>”和“<strong>小顶堆</strong>”。</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/82cfeb937cf644bdbcd4311b3d9e4ef4~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1789297877&amp;x-signature=cPGqqEsvwjS1fpVOg5kDcHfy%2BCQ%3D" alt="image"></p>
+<p>形成了堆的特点，它就能发挥自己独有的威力。</p>
+<p>很多编程语言都提供了“堆”的数据结构，称作“Heap”，遗憾的是，JavaScript中并没有。</p>
+<h2 id="为什么是它"><a href="#为什么是它" class="headerlink" title="为什么是它"></a>为什么是它</h2><p>“堆”结构有什么优势，为什么它是实现Top-K的最佳方案？</p>
+<p>原理如下：</p>
+<ol>
+<li>初始化一个小顶堆，其堆顶元素最小。</li>
+<li>将前 k 个元素依次入堆。</li>
+<li>从第 k + 1 个元素开始，若当前元素大于堆顶元素，则将堆顶元素出堆，并将当前元素入堆。</li>
+<li>遍历完成后，堆中保存的就是最大的 k 个元素。</li>
+</ol>
+<p>这4个步骤，弥补了上述方案的短板：</p>
+<ul>
+<li>不需要维护 N 个元素</li>
+<li>不需要遍历 K 轮</li>
+<li>支持动态更新，且效率很高</li>
+</ul>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><p>你应该还记得上篇文用数组实现的“哈希”，本篇亦然（一点都不意外~）</p>
+<p>可是数组只有一对一的“索引”和“值”，怎么构造成堆呢？需要将其中的元素代表节点值，索引代表节点的位置。节点指针则通过<strong>索引映射公式</strong>来实现。</p>
+<p>为方便使用，我们将映射公式封装成函数：</p>
+<pre><code>/* 获取左子节点的索引 */
+left(i) {
+    return 2 * i + 1;
+}
+
+/* 获取右子节点的索引 */
+right(i) {
+    return 2 * i + 2;
+}
+
+/* 获取父节点的索引 */
+parent(i) {
+    return Math.floor((i - 1) / 2); // 向下整除
+}
+</code></pre><p>这些公式什么意思，又是怎么来的？具体表现如下图所示：</p>
+<p><img src="https://p6-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e4906559609340bf90bae55c8bc9c919~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg54G15oSfX19pZGVh:q75.awebp?rk3s=f64ab15b&amp;x-expires=1789297877&amp;x-signature=JVK7MK8ILy2xAyngfI2yD8bHq1g%3D" alt="image"></p>
+<p>公式描述的是，<strong>给定一个节点 i，通过它来定位“左、右、父”节点</strong>。这里只关心位置和索引，跟值无关。</p>
+<p>当堆结构形成后，就可以进行相关操作了。</p>
+<p>主要关注：<strong>入堆</strong>和<strong>出堆</strong>。</p>
+<p>因为它们可能打破堆结构已经形成的平衡，要做出调整来重新获得平衡。</p>
+<h2 id="入堆"><a href="#入堆" class="headerlink" title="入堆"></a>入堆</h2><p>关键步骤：</p>
+<ol>
+<li>将新元素添加至堆底，即数组中新增一个元素；</li>
+<li>新增元素可能小于堆顶的元素，也可能大于，小的时候不用动，如果大，则需要自底向上一路比较，这个操作称作“<strong>堆化</strong>”。</li>
+<li>堆化的过程就是在做<strong>逐层比较和交换</strong>，直至越过根节点或遇到无须交换的节点，结束。</li>
+</ol>
+<!---->
+<pre><code>/* 元素入堆 */
+push(val) {
+    // 添加节点
+    this.maxHeap.push(val);
+    // 从底至顶堆化
+    this.siftUp(this.size() - 1);
+}
+
+/* 从节点 i 开始，从底至顶堆化 */
+siftUp(i) {
+    while (true) {
+        // 获取节点 i 的父节点
+        const p = this.parent(i);
+        // 当“越过根节点”或“节点无须修复”时，结束堆化
+        if (p &lt; 0 || this.maxHeap[i] &lt;= this.maxHeap[p]) break;
+        // 交换两节点
+        this.swap(i, p);
+        // 循环向上堆化
+        i = p;
+    }
+}
+</code></pre><p>入堆这么麻烦，出堆是不是就容易了，直接删掉？</p>
+<p>当然不是，堆中的元素都存在着相互关联，直接删掉带来的结果是，其余所有元素都要发生变化，这不是明智的做法。</p>
+<h2 id="出堆"><a href="#出堆" class="headerlink" title="出堆"></a>出堆</h2><p>出堆操作也分为以下几步：</p>
+<ol>
+<li>交换堆顶元素与堆底元素（根节点与最右叶节点）。</li>
+<li>将堆底元素从列表中删除（注意，由于已经交换，因此实际上删除的是原来的堆顶元素）。</li>
+<li>从根节点开始，<strong>从顶至底执行堆化</strong>。</li>
+</ol>
+<!---->
+<pre><code>/* 元素出堆 */
+pop() {
+    // 判空处理
+    if (this.isEmpty()) throw new Error(&apos;堆为空&apos;);
+    // 交换根节点与最右叶节点（交换首元素与尾元素）
+    this.swap(0, this.size() - 1);
+    // 删除节点
+    const val = this.maxHeap.pop();
+    // 从顶至底堆化
+    this.siftDown(0);
+    // 返回堆顶元素
+    return val;
+}
+
+/* 从节点 i 开始，从顶至底堆化 */
+siftDown(i) {
+    while (true) {
+        // 判断节点 i, l, r 中值最大的节点，记为 ma
+        const l = this.left(i),
+            r = this.right(i);
+        let ma = i;
+        if (l &lt; this.size() &amp;&amp; this.maxHeap[l] &gt; this.maxHeap[ma]) ma = l;
+        if (r &lt; this.size() &amp;&amp; this.maxHeap[r] &gt; this.maxHeap[ma]) ma = r;
+        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出
+        if (ma === i) break;
+        // 交换两节点
+        this.swap(i, ma);
+        // 循环向下堆化
+        i = ma;
+    }
+}
+</code></pre><h2 id="Top-K的堆实现"><a href="#Top-K的堆实现" class="headerlink" title="Top-K的堆实现"></a>Top-K的堆实现</h2><p>看完了入堆和出堆代码，来完整看一下基于堆寻找最大 K 元素的示例代码。</p>
+<pre><code>/* 元素入堆 */
+function pushMinHeap(maxHeap, val) {
+    // 元素取反
+    maxHeap.push(-val);
+}
+
+/* 元素出堆 */
+function popMinHeap(maxHeap) {
+    // 元素取反
+    return -maxHeap.pop();
+}
+
+/* 访问堆顶元素 */
+function peekMinHeap(maxHeap) {
+    // 元素取反
+    return -maxHeap.peek();
+}
+
+/* 取出堆中元素 */
+function getMinHeap(maxHeap) {
+    // 元素取反
+    return maxHeap.getMaxHeap().map((num) =&gt; -num);
+}
+
+/* 基于堆查找数组中最大的 k 个元素 */
+function topKHeap(nums, k) {
+    // 初始化小顶堆
+    // 请注意：我们将堆中所有元素取反，从而用大顶堆来模拟小顶堆
+    const maxHeap = new MaxHeap([]);
+    // 将数组的前 k 个元素入堆
+    for (let i = 0; i &lt; k; i++) {
+        pushMinHeap(maxHeap, nums[i]);
+    }
+    // 从第 k+1 个元素开始，保持堆的长度为 k
+    for (let i = k; i &lt; nums.length; i++) {
+        // 若当前元素大于堆顶元素，则将堆顶元素出堆、当前元素入堆
+        if (nums[i] &gt; peekMinHeap(maxHeap)) {
+            popMinHeap(maxHeap);
+            pushMinHeap(maxHeap, nums[i]);
+        }
+    }
+    // 返回堆中元素
+    return getMinHeap(maxHeap);
+}
+</code></pre><p>整个过程总共执行了 N 轮入堆和出堆，堆的最大长度为 K ，因此时间复杂度为 O（n log k） 。</p>
+<p>该方法的效率很高，当 k 较小时，时间复杂度趋向 O(n)；当 k 较大时，不会超过 O(n log n) 。</p>
+<p>当有数据不断加入，它可以持续维护堆内的元素，从而实现最大的 k 个元素的动态更新。</p>
+<h2 id="其他应用"><a href="#其他应用" class="headerlink" title="其他应用"></a>其他应用</h2><ul>
+<li><strong>优先队列</strong>：堆通常作为实现优先队列的首选数据结构，其入队和出队操作的时间复杂度均为 O(log n) ，而建堆操作为 O(n) ，都非常高效。</li>
+<li><strong>堆排序</strong>：给定一组数据，我们可以用它们建立一个堆，然后不断地执行元素出堆操作，从而得到有序数据。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本篇文章，我们介绍了使用堆实现Top-K的原理，这是一种经典方式，但不是唯一方式。根据具体场景和数据特点，也可以选择其他方案。比如：快速选择、计数排序/桶排序等。</p>
+<p>这就是工程实践中的<strong>经典权衡</strong>，理论复杂度只是起点，实际选择需要考虑内存、实时性、数据特性、系统架构等综合因素。</p>
+<p><strong>送“书”活动来啦！</strong></p>
+<p>之前总有人问《JavaScript高级程序设计》（第5版）有电子版吗？现在有啦！</p>
+<p>参与方式(“前端说书匠”公众号内参与)：</p>
+<p>1、点个小❤ + 转发朋友圈</p>
+<p>2、分享你2026年的学习计划或者你想要看到解读的书籍/知识点</p>
+<p>1、2须同时满足，最终取评论点赞数前三，若有并列，以时间为序</p>
+<p>如有特别优质的，可获额外奖励，此条解释权归“说书匠”所有。</p>
+<p>开始时间：2026年2月2日早9:00，本篇文章发布后</p>
+<p>截止时间：2026年2月6日晚23:00</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2026/02/01/hello_algo_three/" title="Hello 算法：微博热搜的背后" target="_blank" rel="external">https://ideazhao.com/2026/02/01/hello_algo_three/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/03/01/hello_algo_four/" title="Hello 算法：众里寻她千“百度”"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2025/12/15/hello_algo_two/" title="Hello 算法：以“快”著称的哈希"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>
