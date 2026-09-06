@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感 | 灵感之见</title>
+  <meta name="description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于 Google 的知名前端技术专家马特·弗里斯比编写的 《JavaScript 高级程序设计》(第 5 版)  程序员最讨厌的，是看一段晦涩难懂的代码。 读懂它所花的时间可能远大于应有的开发量。 我们期望，看到勺子就用来舀汤，看到铲子就用来炒菜。一切都符合直觉， 这就是一种“掌控感”。 这种掌控，需要对编程的各种方式足够熟悉。 前面的文章">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感">
+<meta property="og:url" content="https://ideazhao.com/2025/07/27/javascript_high_level_design_four/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于 Google 的知名前端技术专家马特·弗里斯比编写的 《JavaScript 高级程序设计》(第 5 版)  程序员最讨厌的，是看一段晦涩难懂的代码。 读懂它所花的时间可能远大于应有的开发量。 我们期望，看到勺子就用来舀汤，看到铲子就用来炒菜。一切都符合直觉， 这就是一种“掌控感”。 这种掌控，需要对编程的各种方式足够熟悉。 前面的文章">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2025-07-27T08:36:00.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感">
+<meta name="twitter:description" content="每个系列一本前端好书，帮你轻松学重点。 本系列来自曾供职于 Google 的知名前端技术专家马特·弗里斯比编写的 《JavaScript 高级程序设计》(第 5 版)  程序员最讨厌的，是看一段晦涩难懂的代码。 读懂它所花的时间可能远大于应有的开发量。 我们期望，看到勺子就用来舀汤，看到铲子就用来炒菜。一切都符合直觉， 这就是一种“掌控感”。 这种掌控，需要对编程的各种方式足够熟悉。 前面的文章">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2025/07/27/javascript_high_level_design_four/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/07/27/javascript_high_level_design_four/" class="title">JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-07-26T16:00:00.000Z" itemprop="datePublished">2025-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/06/08/javascript_high_level_design_three/" class="title">JavaScript高级程序设计(第5版)：无处不在的集合</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-06-07T16:00:00.000Z" itemprop="datePublished">2025-06-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/05/11/javascript_high_level_design_two/" class="title">JavaScript高级程序设计(第5版)：程序中的数据表达</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-05-10T16:00:00.000Z" itemprop="datePublished">2025-05-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/总结/">总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/04/23/ten_years_reading_record/" class="title">微信读书10年陪伴，当阅读照进现实</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-04-22T16:00:00.000Z" itemprop="datePublished">2025-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/03/31/javascript_high_level_design_one/" class="title">JavaScript高级程序设计(第5版)：扎实的基本功是唯一捷径</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-03-30T16:00:00.000Z" itemprop="datePublished">2025-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么开始"><span class="toc-number">1.</span> <span class="toc-text">怎么开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程与逻辑"><span class="toc-number">2.</span> <span class="toc-text">流程与逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步"><span class="toc-number">3.</span> <span class="toc-text">异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程范式"><span class="toc-number">4.</span> <span class="toc-text">编程范式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-javascript_high_level_design_four" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2025/07/27/javascript_high_level_design_four/" class="article-date">
+	  <time datetime="2025-07-26T16:00:00.000Z" itemprop="datePublished">2025-07-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2025/07/27/javascript_high_level_design_four/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>每个系列一本前端好书，帮你轻松学重点。</p>
+<p>本系列来自曾供职于 Google 的知名前端技术专家<strong>马特·弗里斯比</strong>编写的 <strong>《JavaScript 高级程序设计》(第 5 版)</strong></p>
+</blockquote>
+<p>程序员最讨厌的，是看一段晦涩难懂的代码。</p>
+<p>读懂它所花的时间可能远大于应有的开发量。</p>
+<p>我们期望，看到勺子就用来舀汤，看到铲子就用来炒菜。一切都<strong>符合直觉，</strong> 这就是一种“掌控感”。</p>
+<p>这种掌控，需要对编程的各种方式足够熟悉。</p>
+<p>前面的文章，介绍了 JavaScript 的变量，以及多个变量组成的集合。帮大家建立了对数据的认知，但好像还没有真正开始编程。</p>
+<h2 id="怎么开始"><a href="#怎么开始" class="headerlink" title="怎么开始"></a>怎么开始</h2><p>程序由什么组成，入手点是什么？</p>
+<p>相比繁多的语法，这才是编程真正的门槛。</p>
+<p>比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>,</span><br><span class="line">  b = <span class="number">2</span>;</span><br><span class="line">a + b; <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>没人能从这段代码中理解编程，因为不知道 a、b 代表什么，能干什么，它只有纯粹的数学意义。</p>
+<p>但如果说，清华小学，一年级 500 人，二年级 300 人，问两个年级加起来多少人？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gradeOneStudentCount = <span class="number">500</span>，</span><br><span class="line">gradeTwoStudentCount = <span class="number">300</span>；</span><br><span class="line">gradeOneStudentCount + gradeTwoStudentCount  <span class="comment">// 800</span></span><br></pre></td></tr></table></figure>
+<p>现在你知道，它可以用于计算一所学校两个年级的总人数，<strong>代码被赋予了实际意义</strong>。</p>
+<p>程序就是对现实世界的映射，你只有在实现需求，解决问题时，才能体会程序是怎样把数据连接起来的（由此可见，语义化的命名也是多么重要）。</p>
+<h2 id="流程与逻辑"><a href="#流程与逻辑" class="headerlink" title="流程与逻辑"></a>流程与逻辑</h2><p>真正的程序当然不止加减法这么简单，但也没那么复杂。</p>
+<p>设想一下，如果不是计算一、二年级的人数，而是二十年级，能否得到？</p>
+<p>答案是显然的，不存在二十年级。</p>
+<p>程序拿到“20”这个数值进行判断和查找，就称为“<strong>流程</strong>”。</p>
+<p>“存不存在，合不合理，允不允许”，就称为“<strong>逻辑</strong>”。</p>
+<p>JavaScript 中提供了多种方法进行流程控制和逻辑判断。</p>
+<p><strong>if…else</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gradeLevel;</span><br><span class="line"><span class="keyword">if</span> (gradeLevel &gt;= <span class="number">1</span> &amp;&amp; gradeLevel &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">  <span class="comment">// 合理</span></span><br><span class="line">  <span class="keyword">if</span> (gradeLevel &lt;= <span class="number">6</span>) &#123;</span><br><span class="line">    <span class="comment">// 小学生</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (gradeLevel &gt; <span class="number">6</span> &amp;&amp; gradeLevel &lt; <span class="number">9</span>) &#123;</span><br><span class="line">    <span class="comment">// 初中非毕业班</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是最常见的一种判断，叫“如果…否则”。</p>
+<p>虽然有时你会见到有非常多的 if…else，被人诟病不优雅、维护性差，但在多数时候，它仍是调度大段代码结构最清晰的表达方式。</p>
+<p>需要注意的一点，else 是排除了 if 之后的所有情况，可能因为逻辑疏漏造成误伤，产生 bug。</p>
+<p><strong>switch</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (expression) &#123;</span><br><span class="line">  <span class="keyword">case</span> value1:</span><br><span class="line">    statement;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> value2:</span><br><span class="line">    statement;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>switch 是除了 if 之外最常见的分支处理方式，它适合多个”同类不同值”的情况，与其使用多个 if(expression == “xx”)，不如使用 switch 来得干练。</p>
+<p>不过，同样需要注意，不要漏了 break 和 default。</p>
+<p>漏了 break，即便值已被命中，仍会接着往下走，发生误命中；漏了 default，当出现特殊情况，前面都没有命中时，没有一个可以兜底的值。</p>
+<p><strong>do…while</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125; <span class="keyword">while</span> (expression);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> ((i = <span class="number">10</span>)) &#123;</span><br><span class="line">  i += <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>do while 和 while 看起来像循环，不满足条件就一直执行，到满足为止。</p>
+<p>这种在项目中使用较少，较常见于算法实现，如：排序、二叉树查找之类。</p>
+<p>以上三种，属于较“重”的逻辑工具，通常用来调度主干逻辑，还有三种更“轻”且好用的控制方式，推荐大家熟练掌握。</p>
+<p><strong>条件操作符</strong></p>
+<p>根据前置表达式的 true 或者 false 决定取值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">variable = boolean_expression ? true_value : false_value;</span><br><span class="line"><span class="keyword">let</span> canRead = age &gt; <span class="number">6</span> ? <span class="string">"go to school"</span> : <span class="string">"can't go to school"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>短路操作符</strong></p>
+<p>分两种：</p>
+<p>&amp;&amp;（与）只有 value 为 true 才执行后续表达式。</p>
+<p>||（或）valueA 为 true 就取 valueA，否则取 valueB。</p>
+<p>当然，这里说的 true 或者 false 不单指它的值，类型转换的结果有同等效力，像 “a”、1 都会被转为 true，还可以是一个比较表达式。</p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">variable = value &amp;&amp; expression;</span><br><span class="line"><span class="keyword">let</span> canRead = age &gt; <span class="number">6</span> &amp;&amp; <span class="string">"go to school"</span>;</span><br><span class="line"></span><br><span class="line">variable = valueA || valueB;</span><br><span class="line"><span class="keyword">let</span> canRead = age &gt; <span class="number">6</span> || <span class="string">"can't go to school"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>空值合并操作符</strong></p>
+<p>第一个“??”，作用类似于逻辑或（||），但要求更严格，逻辑或（||）会将 0 与 “” 视为 false，而空值合并，当且仅当表达式的值为 null 或者 undefined，才取后面的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">variable = expression ?? other_value;</span><br><span class="line"><span class="keyword">const</span> displayName = user.name ?? <span class="string">"匿名用户"</span>;</span><br></pre></td></tr></table></figure>
+<p>第二个可选链 ?. 作用类似逻辑与（&amp;&amp;） ，尤其是在属性访问有多层嵌套时。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">variable = res?.data?.status<span class="string">`</span></span><br><span class="line"><span class="string">// 以及与 `</span>??<span class="string">` 更好的协作</span></span><br><span class="line"><span class="string">const foo = a?.b?.c?.d ?? 'default';</span></span><br></pre></td></tr></table></figure>
+<p>上述这三类表达式，其实用 if 都能实现，但它们会让代码更简洁。</p>
+<h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><p>除了条件判断的方式，代码里还有一种手段是控制执行时机。</p>
+<p>多数情况下，代码编写的顺序就是执行顺序，这种机制称为“同步”。</p>
+<p>异步的意思是：“<strong>暂时没有完成，但不影响其他事情的进行</strong>”。</p>
+<p>最形象的类比是点餐，你的点单动作就是发起一条异步指令，点完单你可以去做别的，餐品准备好了再食用。</p>
+<p><strong>定时器</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一次</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 执行这里的代码</span></span><br><span class="line">&#125;，<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多次</span></span><br><span class="line">setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 执行这里代码</span></span><br><span class="line">&#125;，<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<p>setTimeout 用于让代码过一段时间后执行，其中的时间单位为 ms，比如：1000，就是 1s。</p>
+<p>setInterval 是每隔一段时间执行一次，会一直持续下去，直到定时器关闭，时间单位也是 ms。</p>
+<p>这两种定时器曾经在脚本动画方面担当重要角色，但也有其不足，如：时长不够精准、不能跟浏览器任务调度完美契合等，于是有了如下这个角色。</p>
+<p><strong>requestAnimationFrame</strong></p>
+<p>requestAnimationFrame 的使用很简单，就像函数调用一样，把你要执行的代码传进去，不断地调用，就会不断地执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> animationId;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 动画执行</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Animating..."</span>);</span><br><span class="line">  <span class="comment">// 触发下一帧</span></span><br><span class="line">  requestAnimationFrame(animate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 开始动画</span></span><br><span class="line">animationId = requestAnimationFrame(animate);</span><br><span class="line"><span class="comment">// 3s 后停止</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  cancelAnimationFrame(animationId);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Animation stopped!"</span>);</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>这个 api 有什么特别之处？</p>
+<p>需要额外提个概念—<strong>屏幕刷新率</strong>，直观感受就是我们浏览网页、玩游戏时，刷新率越高，体验越流畅。</p>
+<p>requestAnimationFrame 就是浏览器提供的，用于匹配屏幕刷新率的 api，它“知道”浏览器在什么时候适合进行下一次渲染，这样就能跟浏览器引擎的工作节奏完美契合，同时避免 CPU/GPU 的资源浪费。</p>
+<p>不论定时器，还是 requestAnimationFrame，都像是与浏览器进行某种约定，等到约定的时机执行相应的动作。</p>
+<p>本书中，有一个更新也更强大的异步机制就被译为了“<strong>期约</strong>”，它就是重磅选手—Promise。</p>
+<p><strong>Promise</strong></p>
+<p>这个翻译曾引起不小的争议，因为这个词不常用，读着也不顺口，但含义上又是恰当的。</p>
+<p>Promise 的意思是，发起一个指令，指令多久能完成不确定，是成功还是失败也不确定，但终归会有个结果，有结果了会通知“你”，就相当于程序中做了个约定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单创建Promise</span></span><br><span class="line"><span class="keyword">const</span> myPromise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 异步操作</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Promise</span></span><br><span class="line">myPromise</span><br><span class="line">  .then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(result); <span class="comment">// 成功时执行</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error); <span class="comment">// 失败时执行</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>基本的 promise 就这么简单，发起任务，然后等待“成功”或“失败”的结果。</p>
+<p>但需要说明，promise 不单是一个普通的 api，更是一种事务处理方式，所以，用到 promise 的地方并不一定直接创建 promise，通常会说：“异步执行”或者“返回一个 promise”。</p>
+<p>比如，用于发起网络请求的 fetch，剪贴板操作 clipboard、音视频操作 WebRTC 等，它们的使用方式像这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">"https://api.example.com/data"</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> response.json())</span><br><span class="line">  .then(<span class="function">(<span class="params">data</span>) =&gt;</span> <span class="built_in">console</span>.log(data))</span><br><span class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">console</span>.error(<span class="string">"Error:"</span>, error));</span><br></pre></td></tr></table></figure>
+<p>有 then、catch，但没有 promise，因为 promise 被封装到了内部。</p>
+<p>promise 方案之所以能够获得认可，被广泛采用，因为它是更为现代、设计更加合理的异步机制，能够避免因多重依赖形成的“回调地狱”等问题，还有其他特性，后续会单开一个话题分享。</p>
+<h2 id="编程范式"><a href="#编程范式" class="headerlink" title="编程范式"></a>编程范式</h2><p>最后聊聊“范式”，什么是范式？</p>
+<p>你一定听过“面向对象、面向过程、函数式”等。</p>
+<p>范式，可以认为是风格，或者一种解决问题的方式，就像出行的时候可以选择步行、骑车、地铁。</p>
+<p>下面就给大家展示，用三种方式，实现同一种需求的表现。</p>
+<p><strong>面向对象</strong></p>
+<p>以对象为主，通过将数据（属性）和行为（方法）封装在对象中，模拟现实世界的事物和行为。</p>
+<p>核心思想是抽象、封装、继承和多态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EvenSquareCalculator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(arr) &#123;</span><br><span class="line">    <span class="keyword">this</span>.numbers = arr;</span><br><span class="line">  &#125;</span><br><span class="line">  isEven(num) &#123;</span><br><span class="line">    <span class="keyword">return</span> num % <span class="number">2</span> === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  sum() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.numbers</span><br><span class="line">      .filter(<span class="function">(<span class="params">num</span>) =&gt;</span> <span class="keyword">this</span>.isEven(num)) <span class="comment">// 过滤偶数</span></span><br><span class="line">      .map(<span class="function">(<span class="params">num</span>) =&gt;</span> num ** <span class="number">2</span>) <span class="comment">// 计算平方</span></span><br><span class="line">      .reduce(<span class="function">(<span class="params">sum, x</span>) =&gt;</span> sum + x, <span class="number">0</span>); <span class="comment">// 累加</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> calculator = <span class="keyword">new</span> EvenSquareCalculator([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(calculator.sum()); <span class="comment">// 输出: 20</span></span><br></pre></td></tr></table></figure>
+<p><strong>面向过程</strong></p>
+<p>核心思想是通过步骤化分解问题，将程序转化为一系列线性执行的指令。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumOfEvenSquares_procedural</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// 检查偶数</span></span><br><span class="line">      sum += arr[i] * arr[i]; <span class="comment">// 累加平方</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(sumOfEvenSquares_procedural(array)); <span class="comment">// 输出: 20 (2² + 4²)</span></span><br></pre></td></tr></table></figure>
+<p>每个人的编程都是从“面向过程”开始的，因为它简单直接。</p>
+<p>弊端就是逻辑分散，复用性差，随着代码量的增加，维护难度上升。</p>
+<p><strong>函数式</strong></p>
+<p>以函数为主，强调无副作用、不可变数据和声明式代码。</p>
+<p>核心思想是用表达式（而非语句）描述计算逻辑。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sumOfEvenSquares_functional = <span class="function">(<span class="params">arr</span>) =&gt;</span></span><br><span class="line">  arr</span><br><span class="line">    .filter(<span class="function">(<span class="params">x</span>) =&gt;</span> x % <span class="number">2</span> === <span class="number">0</span>) <span class="comment">// 过滤偶数</span></span><br><span class="line">    .map(<span class="function">(<span class="params">x</span>) =&gt;</span> x * x) <span class="comment">// 计算平方</span></span><br><span class="line">    .reduce(<span class="function">(<span class="params">sum, x</span>) =&gt;</span> sum + x, <span class="number">0</span>); <span class="comment">// 累加</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sumOfEvenSquares_functional([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])); <span class="comment">// 输出: 20</span></span><br></pre></td></tr></table></figure>
+<p>这里呈现的函数，是数组中自带的原生方法，也可以是自定义函数，关于函数，后面会有专门一篇文介绍。</p>
+<p><strong>如何选择？</strong></p>
+<p>这么多方案，怎么选，哪种最佳？</p>
+<p>人们常沉迷于寻找“最佳”，实际上，不论是编程，还是现实，都不是非此即彼的淘汰赛，而是彼此互补的团队赛。</p>
+<p>先坐地铁，再骑车，再步行，可以吗？很常见。</p>
+<p>成熟的工匠，会去挖掘每种招数的长处，然后用在适合的地方。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从你敲下第一个字母，定义第一个变量开始，就已经在为向计算机发出指令做准备。</p>
+<p>随着代码量的增多，你是否始终能够很好地理解和掌控代码的走向，不论对于你，还是他人，都非常重要。</p>
+<p>如果不想你的代码背上越来越多的技术债，学习和掌握各种编程方法就是必要的。</p>
+<p>除了本文讨论的内容，让你的代码变得更好的手段还有“算法”和“设计模式”，我们当然会涉及这些内容，但那是后面的事了。</p>
+<p>欢迎持续关注，下篇再会。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2025/07/27/javascript_high_level_design_four/" title="JavaScript 高级程序设计(第 5 版)：好的编程就是掌控感" target="_blank" rel="external">https://ideazhao.com/2025/07/27/javascript_high_level_design_four/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2025/06/08/javascript_high_level_design_three/" title="JavaScript高级程序设计(第5版)：无处不在的集合"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>
