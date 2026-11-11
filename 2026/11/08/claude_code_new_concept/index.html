@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  
+  <title>Claude Code 实战：AI这么强了，为什么还在发明新概念 | 灵感之见</title>
+  <meta name="description" content="粗活儿更容易，但细活儿更快。  很多人看来，AI给这个世界带来的剧变已经黑云压城，他们正快马加鞭地追赶，但仍有相当一部分人没有这个认识，或浅尝辄止。 AI可以回答问题，可以帮忙干活，技术门槛被抹平后，还靠什么拉开差距？ 如果只会发指令，等同于AI时代的“刀耕火种”，仍处于生产力的末端，还需要做哪些探索呢？读罢本文，你会有自己的理解。 Skill我一开始以为，安装好Claude Code直接使用就">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude Code 实战：AI这么强了，为什么还在发明新概念">
+<meta property="og:url" content="https://ideazhao.com/2026/11/08/claude_code_new_concept/index.html">
+<meta property="og:site_name" content="灵感之见">
+<meta property="og:description" content="粗活儿更容易，但细活儿更快。  很多人看来，AI给这个世界带来的剧变已经黑云压城，他们正快马加鞭地追赶，但仍有相当一部分人没有这个认识，或浅尝辄止。 AI可以回答问题，可以帮忙干活，技术门槛被抹平后，还靠什么拉开差距？ 如果只会发指令，等同于AI时代的“刀耕火种”，仍处于生产力的末端，还需要做哪些探索呢？读罢本文，你会有自己的理解。 Skill我一开始以为，安装好Claude Code直接使用就">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ideazhao.com/img/claude_code_concept/mcp.jpg">
+<meta property="og:updated_time" content="2026-11-08T08:46:09.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Claude Code 实战：AI这么强了，为什么还在发明新概念">
+<meta name="twitter:description" content="粗活儿更容易，但细活儿更快。  很多人看来，AI给这个世界带来的剧变已经黑云压城，他们正快马加鞭地追赶，但仍有相当一部分人没有这个认识，或浅尝辄止。 AI可以回答问题，可以帮忙干活，技术门槛被抹平后，还靠什么拉开差距？ 如果只会发指令，等同于AI时代的“刀耕火种”，仍处于生产力的末端，还需要做哪些探索呢？读罢本文，你会有自己的理解。 Skill我一开始以为，安装好Claude Code直接使用就">
+<meta name="twitter:image" content="https://ideazhao.com/img/claude_code_concept/mcp.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ideazhao.com/2026/11/08/claude_code_new_concept/">
+  
+    <link rel="alternate" href="/atom.xml" title="灵感之见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="./idea.png" type="image/x-icon">
+  
+  
+  
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Claude Code 实战：AI这么强了，为什么还在发明新概念","description":"粗活儿更容易，但细活儿更快。 很多人看来，AI给这个世界带来的剧变已经黑云压城，他们正快马加鞭地追赶，但仍有相当一部分人没有这个认识，或浅尝辄止。 AI可以回答问题，可以帮忙干活，技术门槛被抹平后，还 靠什么拉开差距 ？ 如果只会发指令，等同于AI时代的“刀耕火种”，仍处于生产力的末端，还需要做哪些探索呢？读罢本文，你会有自己的理解。 Skill 我一开始以","datePublished":"2026-11-07T16:00:00.000Z","dateModified":"2026-11-08T08:46:09.833Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://ideazhao.com/2026/11/08/claude_code_new_concept/"},"author":{"@type":"Person","name":"灵感_idea"},"publisher":{"@type":"Organization","name":"灵感之见","logo":{"@type":"ImageObject","url":"https://ideazhao.com/images/idea.png"}},"url":"https://ideazhao.com/2026/11/08/claude_code_new_concept/","inLanguage":"zh-Hans","keywords":"书籍"}
+  </script>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ideazhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/idea.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">灵感_idea</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>12年老博，慢工出细活</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UI开发大观/">UI开发大观</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分享交流/">分享交流</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端面试/">前端面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/思考/">思考</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">56</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/组件/">组件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/组件/Vue3/">Vue3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/经历/">经历</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/说书匠/">说书匠</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读后感/">读后感</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a><span class="archive-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/11/11/claude_code_fill_light/" class="title">“小猫补光灯”：App Store 付费榜第一的产品故事</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-11-11T03:11:00.000Z" itemprop="datePublished">2026-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/11/08/claude_code_new_concept/" class="title">Claude Code 实战：AI这么强了，为什么还在发明新概念</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-11-07T16:00:00.000Z" itemprop="datePublished">2026-11-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/11/01/claude_code_tenfold/" class="title">Claude Code：能干活只是初级目标，再提10倍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-10-31T16:00:00.000Z" itemprop="datePublished">2026-11-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/10/24/claude_code_practice/" class="title">Claude Code 编程实战：外行人第一次可以独挑大梁</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-10-23T16:00:00.000Z" itemprop="datePublished">2026-10-24</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/说书匠/">说书匠</a>
+              </p>
+              <p class="item-title">
+                <a href="/2026/10/10/claude_code_how_made/" class="title">火遍全球的Claude Code是怎样炼成的？</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2026-10-09T16:00:00.000Z" itemprop="datePublished">2026-10-10</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Skill"><span class="toc-number">1.</span> <span class="toc-text">Skill</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#两种类型的skill"><span class="toc-number">1.0.1.</span> <span class="toc-text">两种类型的skill</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装别人的skill"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装别人的skill</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hook"><span class="toc-number">2.</span> <span class="toc-text">Hook</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MCP"><span class="toc-number">3.</span> <span class="toc-text">MCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Harness工具链"><span class="toc-number">4.</span> <span class="toc-text">Harness工具链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#勤奋的协作者"><span class="toc-number">5.</span> <span class="toc-text">勤奋的协作者</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-claude_code_new_concept" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Claude Code 实战：AI这么强了，为什么还在发明新概念
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2026/11/08/claude_code_new_concept/" class="article-date">
+	  <time datetime="2026-11-07T16:00:00.000Z" itemprop="datePublished">2026-11-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/说书匠/">说书匠</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/书籍/">书籍</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2026/11/08/claude_code_new_concept/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>粗活儿更容易，但细活儿更快。</p>
+</blockquote>
+<p>很多人看来，AI给这个世界带来的剧变已经黑云压城，他们正快马加鞭地追赶，但仍有相当一部分人没有这个认识，或浅尝辄止。</p>
+<p>AI可以回答问题，可以帮忙干活，技术门槛被抹平后，还<strong>靠什么拉开差距</strong>？</p>
+<p>如果只会发指令，等同于AI时代的“刀耕火种”，仍处于生产力的末端，还需要做哪些探索呢？读罢本文，你会有自己的理解。</p>
+<h2 id="Skill"><a href="#Skill" class="headerlink" title="Skill"></a>Skill</h2><p>我一开始以为，安装好Claude Code直接使用就行。后来发现自己总在进行<strong>重复操作</strong>：每次提交代码前都要提醒进行lint检查，每次新建组件都要交代一遍项目规范，每次查数据都要手动复制SQL结果并粘贴给Claude Code……</p>
+<p>一旦重复超过3次，就该想办法自动化了。</p>
+<p>skill是最容易上手的扩展机制，做法很简单：在.claude/skills/目录下创建一个文件夹，存放一个SKILL.md文件，Claude Code就会根据上下文<strong>自动加载</strong>该文件中的指令。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.claude/skills/</span><br><span class="line">├── react-component/</span><br><span class="line">│   └── SKILL.md    <span class="comment"># 创建React组件的规范和步骤</span></span><br><span class="line">├── fix-issue/</span><br><span class="line">│   └── SKILL.md    <span class="comment"># 修复bug的标准流程</span></span><br><span class="line">└── deploy-preview/</span><br><span class="line">    └── SKILL.md    <span class="comment"># 部署预览环境的步骤</span></span><br></pre></td></tr></table></figure>
+<p>通过/skill-name命令可以手动调用某个skill，Claude Code也会根据对话内容自动判断是否加载相应的skill。</p>
+<p>比如，你说：“帮我创建一个新的React组件”，Claude Code就会自动加载react-component skill中的规范。</p>
+<h4 id="两种类型的skill"><a href="#两种类型的skill" class="headerlink" title="两种类型的skill"></a>两种类型的skill</h4><p><strong>知识型</strong>skill：告诉Claude Code“这个项目里的事情应该怎么做”，比如API规范、编码风格、项目约定。</p>
+<p><strong>工作流型</strong>skill：告诉Claude Code“遇到特定任务按什么步骤执行”，比如/fix-issue（修复bug的标准流程）、/review-pr（代码审查流程）。</p>
+<h4 id="安装别人的skill"><a href="#安装别人的skill" class="headerlink" title="安装别人的skill"></a>安装别人的skill</h4><p>skill可以<strong>共享</strong>，你甚至不需要去它存放的地方找。</p>
+<p>Boris就公开了他常用的skill集合。你告诉Claude Code：“帮我安装Boris的skill集合”，它就会自动找到对应的公开仓库，把SKILL.md下载到本地的~/.claude/skills/boris/目录下。</p>
+<p>安装后，你就拥有了Boris日常使用的工作流，包括他的commit规范、PR模板、代码审查标准等。</p>
+<p>社区正在不断贡献新的skill，你可以在Claude Code中通过/plugin命令浏览。</p>
+<h2 id="Hook"><a href="#Hook" class="headerlink" title="Hook"></a>Hook</h2><p>hook不是新概念，在编程领域很常见，常译为“钩子”，即在<strong>某个节点触发某种行为</strong>。</p>
+<p>skill有一个天然的局限：它本质上是对Claude Code的“建议”。Claude Code会尽量遵守，但<strong>遵从率不是100%</strong>，尤其是在长对话的后期，它可能忘了。</p>
+<p>hook就是为了解决这个问题。它支持多个<strong>触发时机</strong>。</p>
+<ul>
+<li>调用工具前/后</li>
+<li>需要用户授权时</li>
+<li>完成一个对话回合时</li>
+<li>上下文被压缩后</li>
+</ul>
+<p>一个很典型的场景是，Claude Code会在一个复杂任务中途停下来问“要继续吗？”。Stop hook可以检测这种情况，自动让Claude Code继续执行，适合<strong>无人值守</strong>的批处理场景。</p>
+<p>同样，你不需要从零开始写hook，告诉Claude Code：“帮我写一个hook，每次编辑文件后自动运行eslint”，它会帮你生成配置并写入.claude/settings.json文件。</p>
+<h2 id="MCP"><a href="#MCP" class="headerlink" title="MCP"></a>MCP</h2><p>skill和hook的操作，都还是在项目内部，如果你需要<strong>触达外部</strong>，比如，让Claude Code查数据库、调用API、读取设计稿，MCP就派上用场。</p>
+<p>MCP（Model Context Protocol）是Anthropic推出的开放标准，像一个<strong>USB插口</strong>一样，能让AI工具连接外部数据源和服务。</p>
+<p>1.添加MCP服务器（Slack为例）</p>
+<p>代码如下：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一个MCP服务器</span></span><br><span class="line">claude mcp add slack <span class="comment">-- npx -y @modelcontextprotocol/server-slack</span></span><br><span class="line"><span class="comment"># 查看已安装的MCP</span></span><br><span class="line">claude mcp <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+<p>添加后，MCP服务器的能力会以“<strong>工具</strong>”的形式提供给Claude Code。</p>
+<p>2.实用MCP推荐</p>
+<p><img src="/img/claude_code_concept/mcp.jpg" alt="实用MCP推荐"></p>
+<p>Boris有一个经典用法：他给Claude Code接上Slack MCP，当有人在Slack里报告bug时，Claude Code会自动读取bug描述、找到相关代码、尝试修复、提交PR，然后在Slack里回复“已修复，PR链接在这里”。整个过程不需要人工介入。</p>
+<p>不要一开始就试图搭建一套完整的扩展体系。从你最不想再做的那个重复操作开始：总在口述规则？写个skill。总忘记进行lint检查？加个hook。总在手动倒腾数据？接个MCP。一个一个地添加，慢慢地，你的Claude Code就会变成一个为你量身定制的工作台。</p>
+<h2 id="Harness工具链"><a href="#Harness工具链" class="headerlink" title="Harness工具链"></a>Harness工具链</h2><p>讲了这么多具体操作，现在值得建立一个全局视角。Claude Code的所有能力，可以归入3个层次。</p>
+<p><strong>prompt</strong>层：你在终端输入的<strong>每一句话</strong>，比如“帮我加一个登录页面”“修复这个bug”等。大多数初学者的全部交互停留在这一层。</p>
+<p><strong>context</strong>层：Claude Code在回答之前所“看到”的<strong>所有信息</strong>，包括CLAUDE.md文件、项目的文件结构、Git提交历史、package.json中的依赖列表等。这些信息不需要你每次重复提供，Claude Code会自动读取。上篇文章提到的CLAUDE.md，就是在优化这一层。</p>
+<p><strong>harness</strong>层：你搭建的<strong>自动化环境</strong>。skill把常用工作流封装成可复用的指令；hook让特定事件自动触发操作；MCP可以连接外部服务；Agent Teams让多个Claude Code智能体并行协作。这一层的特点是一旦搭建完成，就一直工作，不需要你每次手动触发。</p>
+<p>Claude Code的表现，就取决于这3层的综合质量。如果读完本书只记住一件事，那么请记住：<strong>尽量把信息沉淀到context层，把重复操作交给harness层，只在prompt层处理真正需要临时决策的事情</strong>。</p>
+<p>一个完整的harness什么样，以作者的写作项目为例：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">~/Documents/写作/</span><br><span class="line">├── CLAUDE.<span class="built_in">md</span>              ← 路由器：根据任务关键词分发到子目录</span><br><span class="line">├── <span class="number">01</span>-公众号写作/</span><br><span class="line">│   ├── CLAUDE.<span class="built_in">md</span>          ← 写作风格、审校规则、发布流程</span><br><span class="line">│   └── 项目/</span><br><span class="line">│       └── <span class="number">2026</span>.<span class="number">03</span>-某项目/</span><br><span class="line">│           └── README.<span class="built_in">md</span>  ← 项目状态和文件说明</span><br><span class="line">└── .claude/</span><br><span class="line">    └── skills/</span><br><span class="line">        ├── huashu-proofreading/   ← 三遍审校</span><br><span class="line">        ├── huashu-research/       ← 结构化调研</span><br><span class="line">        └── huashu-image-upload/   ← 配图</span><br></pre></td></tr></table></figure>
+<h2 id="勤奋的协作者"><a href="#勤奋的协作者" class="headerlink" title="勤奋的协作者"></a>勤奋的协作者</h2><p>Boris曾公开表示，自己超过90%的代码由Claude Code生成。</p>
+<p>他的日常工作更多是<strong>描述需求、审查输出、做架构决策</strong>，更像是一名有技术判断力的产品经理。</p>
+<p>这意味着关键能力正在发生转移。</p>
+<p><strong>旧能力</strong>（重要性下降）：编码能力、框架与API记忆能力、手动调试技巧、代码模板积累</p>
+<p><strong>新能力</strong>（重要性上升）：需求拆解能力、架构判断力、输出质量、评审能力、产品品味</p>
+<p>所以，顺应发展的当务之急，是不再死守阵地，对技术的细枝末节过多投入，而是懂得交给AI更多的任务，同时教会AI怎么做。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ideazhao.com/2026/11/08/claude_code_new_concept/" title="Claude Code 实战：AI这么强了，为什么还在发明新概念" target="_blank" rel="external">https://ideazhao.com/2026/11/08/claude_code_new_concept/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ideazhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/idea.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ideazhao" target="_blank"><span class="text-dark">灵感_idea</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>反复，是最好的精进法宝。勇于尝试，才能拥有向上的人生。常年码字，海量阅读，热爱编程，健身达人。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="tcomment"></div>
+      
+        <p class="text-muted" style="margin-top:1em;">Twikoo 已启用，请在主题配置中填写 <code>comment.twikoo.envId</code>。</p>
+      
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2026/11/11/claude_code_fill_light/" title="“小猫补光灯”：App Store 付费榜第一的产品故事"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2026/11/01/claude_code_tenfold/" title="Claude Code：能干活只是初级目标，再提10倍"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">    <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat," data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/ali-pay.jpeg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat-pay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/ideazhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/ideazhao" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
